@@ -1,0 +1,2 @@
+sourceIP;destinationIP;protocol;sourcePort;destinationPort;expected
+192.168.0.2;10.0.0.2;tcp;*;80;deny

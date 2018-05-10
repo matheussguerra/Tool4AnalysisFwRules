@@ -1,0 +1,2 @@
+label;command
+r1;iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP
