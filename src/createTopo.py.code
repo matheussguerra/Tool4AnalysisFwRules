@@ -112,7 +112,7 @@ class Host:
 class Interface():
 	"""
 	Esta classe tem por objetivo abstrair o conceito de interface (de rede), contendo seus principais atributos.
-	Uma interface contém um:
+	Uma interface coném um:
 	- ip: ip(ipv4)
 	- mask: mascára do ip
 	- gateway: gateway padrão.
@@ -286,7 +286,7 @@ def tests(net):
                         hostNET.cmd(cmd.start_tcpdump())
 
 	for test in listTests:
-		pass		
+		
 
 
 
