@@ -7,7 +7,7 @@ import time
 #script --es --tcp <ip sv> --sport 80
 #script --ec --tcp <ip sv> --dport 80
 
-
+#see argparse
 def clientSide():
 	try:
 		host = sys.argv[3]
@@ -27,9 +27,12 @@ def clientSide():
 		pass
 
 	tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	client_address = ('localhost', int(sport))
-	tcp.bind(client_address)
-	sv = (host, dport)
+	try:
+		client_address = ('192.168.0.2', int(sport))
+		tcp.bind(client_address)
+	except Exception as nobind:
+		pass
+	sv = (host, int(dport))
 	tcp.connect(sv)
 	time.sleep(1)
 	tcp.close()
@@ -46,7 +49,7 @@ def serverSide():
 	try:		
 		sport = int(sys.argv[5])
 	except Exception as err2:
-		print('especificar porta de escutq do servidor')
+		print('especificar porta de escuta do servidor')
 		exit(1)
 
 
