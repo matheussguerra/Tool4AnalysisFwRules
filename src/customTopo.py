@@ -48,8 +48,8 @@ class Command():
 		return "killall tcpdump"
 
 	def convertLogTcpdump(self):
-		return "sudo tcpdump -r " + self.name + ".log >> " + self.name + ".txt"	
-
+		return "sudo tcpdump -r " + self.name + ".log >> " + self.name + ".txt"
+	
 
 
 class Host:
@@ -162,12 +162,14 @@ def readJsonFile():
 def createHosts(hosts):
 	for i in range(0, len(hosts)):
 		attrIface = []
-		attrCommands =[]
+		attrCommands = []
 		attrType = hosts[i]["type"]
 		attrLabel = hosts[i]["label"]
 		attrDNS = (hosts[i]["dns"])
 		attrIface = createIface(hosts[i]["iface"], attrLabel)
+
 		host = Host(attrType, attrLabel, attrDNS, attrIface)
+
 		try:
 			for j in range(0, len(hosts[i]["fwCommand"])):
 				attrCommands.append(hosts[i]["fwCommand"][j])				
@@ -175,8 +177,7 @@ def createHosts(hosts):
 
 		except Exception as e:
 			pass
-		listHosts.append(host)
-		
+		listHosts.append(host)		
 
 
 def createIface(ifaces, label):
@@ -185,8 +186,11 @@ def createIface(ifaces, label):
 		ip = ifaces[i]["ip"]
 		mask = ifaces[i]["mask"]
 		gw = ifaces[i]["gw"]
+
 		attrIface.append(Interface(ip, mask, gw, i, label))
+
 	return attrIface
+	
 	
 
 def createLinks(data):
@@ -223,8 +227,16 @@ def tests(net):
 			hostNET.cmd(command.start_tcpdump())
 
 	for test in listTests:
-		#implmentar
-		pass
+		if(test.protocol == "tcp"):
+			#start server
+			
+			#start client
+			#verificar timeout
+		if(test.protocol == "udp"):
+			pass
+		if(test.protocol == "icmp"):
+			pass
+
 	command.stop_tcpdump()	
 
 

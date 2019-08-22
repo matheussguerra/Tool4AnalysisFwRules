@@ -3,9 +3,29 @@
 import socket
 import sys
 import time
+import argparse
 
 #script --es --tcp <ip sv> --sport 80
 #script --ec --tcp <ip sv> --dport 80
+
+# parser = argparse.ArgumentParser(description = 'Tool for packet creation.')
+
+# parser.add_argument('-es', action = 'store', dest = 'es',
+#                            default = 'es', required = False,
+#                            help = 'Habilitar modo de escuta')
+
+# parser.add_argument('-ec', action = 'store', dest = 'ec',
+#                            default = 'ec', required = False,
+#                            help = 'Habilitar modo client')
+
+# parser.add_argument('-prot', action = 'store', dest = 'protocol',
+#                            required = True,
+#                            help = 'Protocolo: -prot tcp|udp')
+
+# parser.add_argument('-ip', action = 'store', dest = 'ip',
+#                            required = True,
+#                            help = 'Informar ip de destino, caso esteja no modo -es informe o ip do servidor')						
+
 
 #see argparse
 def clientSide():
