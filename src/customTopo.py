@@ -229,9 +229,11 @@ def tests(net):
 	for test in listTests:
 		if(test.protocol == "tcp"):
 			#start server
+
 			
 			#start client
 			#verificar timeout
+			pass
 		if(test.protocol == "udp"):
 			pass
 		if(test.protocol == "icmp"):
