@@ -53,7 +53,7 @@ def clientSide():
 	except Exception as nobind:
 		pass
 	sv = (host, int(dport))
-	tcp.settimeout(10)
+	tcp.settimeout(5)
 	tcp.connect(sv)
 	tcp.settimeout(None)
 	time.sleep(1)
