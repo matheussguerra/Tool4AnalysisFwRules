@@ -47,12 +47,11 @@ def clientSide():
 		pass
 
 	tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	tcp.timeout(5)
 	try:
 		client_address = ('192.168.0.2', int(sport))
 		tcp.bind(client_address)
 	except Exception as nobind:
-		pass
+		tcp.close()
 	sv = (host, int(dport))
 	tcp.connect(sv)
 	time.sleep(1)
