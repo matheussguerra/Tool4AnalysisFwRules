@@ -51,9 +51,11 @@ def clientSide():
 		client_address = ('192.168.0.2', int(sport))
 		tcp.bind(client_address)
 	except Exception as nobind:
-		tcp.close()
+		pass
 	sv = (host, int(dport))
+	tcp.settimeout(10)
 	tcp.connect(sv)
+	tcp.settimeout(None)
 	time.sleep(1)
 	tcp.close()
 
