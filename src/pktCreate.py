@@ -78,12 +78,12 @@ def serverSide():
 	tcp.bind(sv_address) #bind do socket para a porta
 	tcp.listen(1)#ouvindo em busca de conexões
 
-	while True:
-		print("Aguardando por conexão de clientes...")
-		connection, client_address = tcp.accept()
-		print ("Concetado por: " + str(client_address))
-		time.sleep(1)
-		connection.close()
+	#while True:
+	print("Aguardando por conexão de clientes...")
+	connection, client_address = tcp.accept()
+	print ("Concetado por: " + str(client_address))
+	time.sleep(1)
+	connection.close()
 
 
 
