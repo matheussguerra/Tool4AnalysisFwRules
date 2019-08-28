@@ -232,7 +232,7 @@ def tests(net):
 	for test in listTests:
 		info("aqui")
 		for host in listHosts:
-			info(host.iface(0))
+			info(host.iface[0])
 			info("teste: " + test.destinationIP + " host: " + host.iface(0))
 			info("teste: " + test.sourceIP + " host: " + host.iface(0))
 			if test.destinationIP in host.iface:
