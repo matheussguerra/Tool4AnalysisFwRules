@@ -238,25 +238,26 @@ def tests(net):
 		if(test.protocol == "tcp"):
 			#start server
 			info("*** subindo servidor *** \n")
-			hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
+			#hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
 			#start client
 			info("*** conectando cliente *** \n")
-			hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
+			#hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
 			#verificar timeout
 			info('*** Testing...***')
-			time.sleep(10)
+			#time.sleep(10)
 			pass
 		if(test.protocol == "udp"):
 			pass
 		if(test.protocol == "icmp"):
 			pass
 
-	command.stop_tcpdump()
-	for host in listHosts:
-		for iface in host.iface:
-			command = Command(iface)
-			hostNET = net.getNodeByName(host.label)
-			hostNET.cmd(command.convertLogTcpdump())
+	#command.stop_tcpdump()
+
+	#for host in listHosts:
+		#for iface in host.iface:
+			#command = Command(iface)
+			#hostNET = net.getNodeByName(host.label)
+			#hostNET.cmd(command.convertLogTcpdump())
 
 
 
