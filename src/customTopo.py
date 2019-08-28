@@ -237,7 +237,6 @@ def tests(net):
 			else:
 				pass
 		if(test.protocol == "tcp"):
-			hostSourceLabel.cmd("ping -c1 8.8.8.8")
 			#start server
 			info("*** subindo servidor *** \n")
 			hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
@@ -253,7 +252,7 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			pass
 
-	#command.stop_tcpdump()
+	command.stop_tcpdump()
 
 	for host in listHosts:
 		for iface in host.iface:
