@@ -45,7 +45,7 @@ class Command():
 		return "sudo tcpdump -i " + self.name + " -w " + self.name + ".log not arp &"
 
 	def stop_tcpdump(self):
-		return "killall -1 tcpdump"
+		return "killall -SIGHUP tcpdump"
 
 	def convertLogTcpdump(self):
 		return "sudo tcpdump -r " + self.name + ".log >> " + self.name + ".txt"
@@ -258,7 +258,7 @@ def tests(net):
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
 			hostNET.cmd(command.convertLogTcpdump())
-			#hostNET.cmd("rm " + iface.name + ".log")
+			hostNET.cmd("rm " + iface.name + ".log")
 
 
 
