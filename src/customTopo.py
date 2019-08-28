@@ -233,8 +233,8 @@ def tests(net):
 		info("aqui")
 		for host in listHosts:
 			info(host.iface[0].ip)
-			info("teste: " + test.destinationIP + " host: " + host.iface(0))
-			info("teste: " + test.sourceIP + " host: " + host.iface(0))
+			info("teste: " + test.destinationIP + " host: " + host.iface[0].ip)
+			info("teste: " + test.sourceIP + " host: " + host.iface[0].ip)
 			if test.destinationIP in host.iface:
 				hostDestLabel = net.getNodeByName(host.label)
 			if test.sourceIP in host.iface:
