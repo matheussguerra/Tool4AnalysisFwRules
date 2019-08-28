@@ -228,8 +228,6 @@ def tests(net):
 
 	for test in listTests:
 		for host in listHosts:
-			info("teste: " + test.destinationIP + " host: " + host.iface[0].ip + "\n")
-			info("teste: " + test.sourceIP + " host: " + host.iface[0].ip + "\n")
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
 			if test.destinationIP in host.iface[0].ip:
 				hostDestLabel = net.getNodeByName(host.label)
@@ -239,8 +237,10 @@ def tests(net):
 				pass
 		if(test.protocol == "tcp"):
 			#start server
+			info("*** subindo servidor *** \n")
 			hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
 			#start client
+			info("*** conectando cliente *** \n")
 			hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
 			#verificar timeout
 			info('*** Testing...***')
@@ -251,7 +251,13 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			pass
 
-	command.stop_tcpdump()	
+	command.stop_tcpdump()
+	for host in listHosts:
+		for iface in host.iface:
+			command = Command(iface)
+			hostNET = net.getNodeByName(host.label)
+			hostNET.cmd(command.convertLogTcpdump())
+
 
 
 
