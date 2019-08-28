@@ -45,7 +45,7 @@ class Command():
 		return "sudo tcpdump -i " + self.name + " -w " + self.name + ".log not arp &"
 
 	def stop_tcpdump(self):
-		return "killall -SIGHUP tcpdump"
+		return "killall -1 tcpdump"
 
 	def convertLogTcpdump(self):
 		return "sudo tcpdump -r " + self.name + ".log >> " + self.name + ".txt"
