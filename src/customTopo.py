@@ -45,7 +45,7 @@ class Command():
 		return "sudo tcpdump -i " + self.name + " -w " + self.name + ".log not arp &"
 
 	def stop_tcpdump(self):
-		return "killall tcpdump"
+		return "killall -1 tcpdump"
 
 	def convertLogTcpdump(self):
 		return "sudo tcpdump -r " + self.name + ".log >> " + self.name + ".txt"
@@ -238,10 +238,10 @@ def tests(net):
 		if(test.protocol == "tcp"):
 			#start server
 			info("*** subindo servidor *** \n")
-			#hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
+			hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
 			#start client
 			info("*** conectando cliente *** \n")
-			#hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
+			hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
 			#verificar timeout
 			info('*** Testing...***')
 			#time.sleep(10)
@@ -251,13 +251,14 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			pass
 
-	#command.stop_tcpdump()
+	command.stop_tcpdump()
 
-	#for host in listHosts:
-		#for iface in host.iface:
-			#command = Command(iface)
-			#hostNET = net.getNodeByName(host.label)
-			#hostNET.cmd(command.convertLogTcpdump())
+	for host in listHosts:
+		for iface in host.iface:
+			command = Command(iface)
+			hostNET = net.getNodeByName(host.label)
+			hostNET.cmd(command.convertLogTcpdump())
+			hostNET.cmd("rm " + iface.name + ".log")
 
 
 
