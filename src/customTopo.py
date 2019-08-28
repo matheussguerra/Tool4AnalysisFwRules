@@ -230,8 +230,7 @@ def tests(net):
 
 		info("\n")
 	for test in listTests:
-		info(test + "\n--\n")
-
+		info("--")
 		for host in listHosts:
 			info("teste: " + test.destinationIP + " host: " + host.iface)
 			info("teste: " + test.sourceIP + " host: " + host.iface)
