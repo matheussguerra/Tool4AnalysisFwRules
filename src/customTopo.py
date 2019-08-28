@@ -232,8 +232,8 @@ def tests(net):
 	for test in listTests:
 		info("--")
 		for host in listHosts:
-			info("teste: " + test.destinationIP + " host: " + host.iface)
-			info("teste: " + test.sourceIP + " host: " + host.iface)
+			info("teste: " + test.destinationIP + " host: " + host.iface(0))
+			info("teste: " + test.sourceIP + " host: " + host.iface(0))
 			if test.destinationIP in host.iface:
 				hostDestLabel = net.getNodeByName(host.label)
 			if test.sourceIP in host.iface:
