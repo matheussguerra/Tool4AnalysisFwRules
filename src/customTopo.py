@@ -252,14 +252,14 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			pass
 
-	command.stop_tcpdump()
+	#command.stop_tcpdump()
 
 	for host in listHosts:
 		for iface in host.iface:
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
-			hostNET.cmd(command.convertLogTcpdump())
-			time.sleep(3)
+			#hostNET.cmd(command.convertLogTcpdump())
+			#time.sleep(3)
 			#hostNET.cmd("rm " + iface.name + ".log")
 
 
