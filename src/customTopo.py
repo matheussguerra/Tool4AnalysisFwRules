@@ -244,7 +244,7 @@ def tests(net):
 			hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
 			#verificar timeout
 			info('*** Testing...***')
-			#time.sleep(10)
+			time.sleep(10)
 			pass
 		if(test.protocol == "udp"):
 			pass
