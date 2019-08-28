@@ -224,7 +224,8 @@ def tests(net):
 		for iface in host.iface:
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
-			#hostNET.cmd(command.start_tcpdump())
+			hostNET.cmd(command.start_tcpdump())
+			time.sleep(3)
 
 	for test in listTests:
 		for host in listHosts:
@@ -251,13 +252,14 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			pass
 
-	#command.stop_tcpdump()
+	command.stop_tcpdump()
 
 	for host in listHosts:
 		for iface in host.iface:
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
-			#hostNET.cmd(command.convertLogTcpdump())
+			hostNET.cmd(command.convertLogTcpdump())
+			time.sleep(3)
 			#hostNET.cmd("rm " + iface.name + ".log")
 
 
