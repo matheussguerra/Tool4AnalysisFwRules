@@ -227,11 +227,18 @@ def tests(net):
 			hostNET.cmd(command.start_tcpdump())
 
 	for test in listTests:
+		for host in listHosts:
+			if test.destinationIP in host.iface:
+				hostDestLabel = net.getNodeByName(host.label)
+			if test.sourceIP in host.iface:
+				hostSourceLabel = net.getNodeByName(host.label)
+			else:
+				pass
 		if(test.protocol == "tcp"):
 			#start server
-
-			
+			hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
 			#start client
+			hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
 			#verificar timeout
 			pass
 		if(test.protocol == "udp"):
