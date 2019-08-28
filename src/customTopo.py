@@ -284,7 +284,7 @@ def emptyNet():
 			hostNET.cmd(cmd.configRouter())
 
 	info('*** Init tests ***\n')
-	#tests(net)
+	tests(net)
 
 	#info('*** Starting CLI ***\n')
 	CLI(net)
