@@ -228,7 +228,7 @@ def tests(net):
 			hostNET = net.getNodeByName(host.label)
 			hostNET.cmd(command.start_tcpdump())
 
-	info("\n")
+		info("\n")
 	for test in listTests:
 		info(test)
 		for host in listHosts:
