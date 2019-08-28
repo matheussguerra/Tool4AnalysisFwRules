@@ -225,7 +225,7 @@ def tests(net):
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
 			hostNET.cmd(command.start_tcpdump())
-			time.sleep(3)
+			time.sleep(1)
 
 	for test in listTests:
 		for host in listHosts:
@@ -237,6 +237,7 @@ def tests(net):
 			else:
 				pass
 		if(test.protocol == "tcp"):
+			hostSourceLabel.cmd("ping 8.8.8.8")
 			#start server
 			info("*** subindo servidor *** \n")
 			hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
