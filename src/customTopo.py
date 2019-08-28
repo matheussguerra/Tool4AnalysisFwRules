@@ -223,18 +223,14 @@ def tests(net):
 	for host in listHosts:
 		info(host.label)
 		for iface in host.iface:
-			info (" " + iface.ip)
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
 			hostNET.cmd(command.start_tcpdump())
 
-		info("\n")
 	for test in listTests:
-		info("aqui")
 		for host in listHosts:
-			info(host.iface[0].ip)
-			info("teste: " + test.destinationIP + " host: " + host.iface[0].ip)
-			info("teste: " + test.sourceIP + " host: " + host.iface[0].ip)
+			info("teste: " + test.destinationIP + " host: " + host.iface[0].ip + "\n")
+			info("teste: " + test.sourceIP + " host: " + host.iface[0].ip + "\n")
 			if test.destinationIP in host.iface:
 				hostDestLabel = net.getNodeByName(host.label)
 			if test.sourceIP in host.iface:
