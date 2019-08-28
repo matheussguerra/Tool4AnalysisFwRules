@@ -221,7 +221,6 @@ def createTests(data):
 
 def tests(net):
 	for host in listHosts:
-		info(host.label)
 		for iface in host.iface:
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
@@ -231,9 +230,10 @@ def tests(net):
 		for host in listHosts:
 			info("teste: " + test.destinationIP + " host: " + host.iface[0].ip + "\n")
 			info("teste: " + test.sourceIP + " host: " + host.iface[0].ip + "\n")
-			if test.destinationIP in host.iface:
+			#dar um jeito de iterar em todas as interfaces (estático no momento)
+			if test.destinationIP in host.iface[0].ip:
 				hostDestLabel = net.getNodeByName(host.label)
-			if test.sourceIP in host.iface:
+			if test.sourceIP in host.iface[0].ip:
 				hostSourceLabel = net.getNodeByName(host.label)
 			else:
 				pass
