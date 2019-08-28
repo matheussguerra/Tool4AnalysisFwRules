@@ -221,12 +221,16 @@ def createTests(data):
 
 def tests(net):
 	for host in listHosts:
+		print(host.label)
 		for iface in host.iface:
+			print (" " + iface)
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
 			hostNET.cmd(command.start_tcpdump())
 
+	pritn("\n")
 	for test in listTests:
+		print(test)
 		for host in listHosts:
 			if test.destinationIP in host.iface:
 				hostDestLabel = net.getNodeByName(host.label)
@@ -256,6 +260,7 @@ def emptyNet():
 	info('*** Adding hosts ***\n')
 	for host in listHosts:
 		net.addHost(host.label)
+		print("adicionado: " + host.label + "\n")
 
 	info('*** Creating links ***\n')
 	for link in listLink:
@@ -286,7 +291,7 @@ def emptyNet():
 	info('*** Init tests ***\n')
 	tests(net)
 
-	#info('*** Starting CLI ***\n')
+	info('*** Starting CLI ***\n')
 	CLI(net)
 
 	info('*** Stopping newtwork ***\n')
