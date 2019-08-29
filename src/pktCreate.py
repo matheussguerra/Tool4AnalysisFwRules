@@ -76,7 +76,7 @@ def serverSide():
 
 
 	tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #cria um socket tcp
-	#tcp.settimeout(5)
+	tcp.settimeout(5)
 	sv_address = (host, sport) #define o endereço do server
 	tcp.bind(sv_address) #bind do socket para a porta
 	tcp.listen(1)#ouvindo em busca de conexões
