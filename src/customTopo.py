@@ -242,7 +242,7 @@ def tests(net):
 			hostDestLabel.cmd("echo python pktCreate.py --es --" + test.protocol + " " + test.destinationIP + " --sport " + test.sourcePort)
 			#start client
 			info("*** conectando cliente *** \n")
-			hostSourceLabel("python pktCreate.py --ec --" + test.protocol + " " + test.sourceIP + " --dport " + test.destinationPort)
+			hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " " + test.sourceIP + " --dport " + test.destinationPort)
 			info('*** Testing...***\n')
 			time.sleep(10)
 			pass
