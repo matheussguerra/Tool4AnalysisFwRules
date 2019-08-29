@@ -259,9 +259,9 @@ def tests(net):
 		for iface in host.iface:
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
-			hostNET.cmd(command.convertLogTcpdump())
+			#hostNET.cmd(command.convertLogTcpdump())
 			#time.sleep(3)
-			hostNET.cmd("rm " + iface.name + ".log")
+			#hostNET.cmd("rm " + iface.name + ".log")
 
 
 
