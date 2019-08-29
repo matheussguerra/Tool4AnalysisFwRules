@@ -253,7 +253,9 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			pass
 
-	command.stop_tcpdump()
+	aux = listHosts[0].label
+	hostNet = net.getNodeByName(aux)
+	hostNet.cmd(command.stop_tcpdump())
 
 	for host in listHosts:
 		for iface in host.iface:
