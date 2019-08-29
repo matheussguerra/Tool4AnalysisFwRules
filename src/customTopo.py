@@ -260,8 +260,8 @@ def tests(net):
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
 			hostNET.cmd(command.convertLogTcpdump())
-			time.sleep(3)
-			hostNET.cmd("rm " + iface.name + ".log")
+			time.sleep(1)
+			#hostNET.cmd("rm " + iface.name + ".log")
 
 
 
