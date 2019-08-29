@@ -255,7 +255,7 @@ def tests(net):
 
 	aux = listHosts[0].label
 	hostNet = net.getNodeByName(aux)
-	hostNet.cmd(command.stop_tcpdump()
+	hostNet.cmd(command.stop_tcpdump())
 
 	for host in listHosts:
 		for iface in host.iface:
