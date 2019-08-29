@@ -235,22 +235,27 @@ def tests(net):
 			if test.sourceIP in host.iface[0].ip:
 				hostSourceLabel = net.getNodeByName(host.label)
 			else:
-				info("*** Não encontramos o ip listado no teste ***\n")
-		#start server
-		info("*** subindo servidor *** \n")
-		info("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
-		hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
-		#start client
-		info("*** conectando cliente *** \n")
-		info("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
-		hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
-			
-		info('*** Testing...***')
-		time.sleep(10)
+				pass
+		if(test.protocol == "tcp"):
+			#start server
+			#hostSourceLabel.cmd("ping -c 1 192.168.0.1")
+			info("*** subindo servidor *** \n")
+			#hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
+			#start client
+			info("*** conectando cliente *** \n")
+			#hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
+			#verificar timeout
+			info('*** Testing...***')
+			time.sleep(10)
+			pass
+		if(test.protocol == "udp"):
+			pass
+		if(test.protocol == "icmp"):
+			pass
 
-	aux = listHosts[0].labelcommand.stop_tcpdump()
+	aux = listHosts[0].label
 	hostNet = net.getNodeByName(aux)
-	hostNet.cmd(command.stop_tcpdump())
+	hostNet.cmd(command.stop_tcpdump()
 
 	for host in listHosts:
 		for iface in host.iface:
