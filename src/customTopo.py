@@ -239,12 +239,12 @@ def tests(net):
 		if(test.protocol == "tcp"):
 			#start server
 			info("*** subindo servidor *** \n")
-			info("python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort)
+			hostDestLabel.cmd("echo python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort + " >> test.txt")
 			#start client
 			info("*** conectando cliente *** \n")
-			info("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
+			#info("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
 			#verificar timeout
-			info('*** Testing...***')
+			info('*** Testing...***\n')
 			time.sleep(10)
 			pass
 		if(test.protocol == "udp"):
