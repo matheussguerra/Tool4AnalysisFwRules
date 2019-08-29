@@ -239,11 +239,10 @@ def tests(net):
 		if(test.protocol == "tcp"):
 			#start server
 			info("*** subindo servidor *** \n")
-			hostDestLabel.cmd("echo python pktCreate.py --es --" + test.protocol + " --sport " + test.sourcePort + " >> test.txt")
+			hostDestLabel.cmd("echo python pktCreate.py --es --" + test.protocol + " " + test.destinationIP + " --sport " + test.sourcePort)
 			#start client
 			info("*** conectando cliente *** \n")
-			#info("python pktCreate.py --ec --" + test.protocol + " --dport " + test.sourcePort)
-			#verificar timeout
+			info("python pktCreate.py --ec --" + test.protocol + " " + test.sourceIP + " --dport " + test.sourcePort)0
 			info('*** Testing...***\n')
 			time.sleep(10)
 			pass
