@@ -239,10 +239,10 @@ def tests(net):
 		if(test.protocol == "tcp"):
 			#start server
 			info("*** subindo servidor *** \n")
-			#hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " " + test.destinationIP + " --sport " + test.destinationPort)
+			hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " " + test.destinationIP + " --sport " + test.destinationPort)
 			#start client
 			info("*** conectando cliente *** \n")
-			#hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " " + test.destinationIP + " --dport " + test.destinationPort)
+			hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " " + test.destinationIP + " --dport " + test.destinationPort)
 			info('*** Testing...***\n')
 			time.sleep(10)
 			pass
@@ -259,9 +259,9 @@ def tests(net):
 		for iface in host.iface:
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
-			#hostNET.cmd(command.convertLogTcpdump())
-			#time.sleep(3)
-			#hostNET.cmd("rm " + iface.name + ".log")
+			hostNET.cmd(command.convertLogTcpdump())
+			time.sleep(3)
+			hostNET.cmd("rm " + iface.name + ".log")
 
 
 
