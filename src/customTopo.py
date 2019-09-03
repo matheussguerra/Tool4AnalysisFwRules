@@ -228,6 +228,7 @@ def tests(net):
 			time.sleep(1)
 
 	for test in listTests:
+		info("Iniciando teste:\n" + str(test))
 		for host in listHosts:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
 			if test.destinationIP in host.iface[0].ip:
@@ -237,19 +238,22 @@ def tests(net):
 			else:
 				pass
 		if(test.protocol == "tcp"):
-			#start server
-			info("*** subindo servidor *** \n")
-			hostDestLabel.cmd("python pktCreate.py --es --" + test.protocol + " " + test.destinationIP + " --sport " + test.destinationPort)
-			#start client
-			info("*** conectando cliente *** \n")
-			hostSourceLabel.cmd("python pktCreate.py --ec --" + test.protocol + " " + test.destinationIP + " --dport " + test.destinationPort)
-			info('*** Testing...***\n')
+			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort)
+			if(test.sourcePort == "*"):
+				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
+			else:
+				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
 			time.sleep(10)
-			pass
 		if(test.protocol == "udp"):
-			pass
+			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort)
+			if(test.sourcePort == "*"):
+				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
+			else:
+				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
+			time.sleep(10)
 		if(test.protocol == "icmp"):
-			pass
+			hostSourceLabel.cmd("ping -c 1 " + test.destinationIP)
+		
 
 	aux = listHosts[0].label
 	hostNet = net.getNodeByName(aux)
