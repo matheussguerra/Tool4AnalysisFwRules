@@ -228,7 +228,7 @@ def tests(net):
 			time.sleep(1)
 
 	for test in listTests:
-		info("Iniciando teste:\n" + str(test))
+		info("Iniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
 			if test.destinationIP in host.iface[0].ip:
@@ -258,7 +258,7 @@ def tests(net):
 	aux = listHosts[0].label
 	hostNet = net.getNodeByName(aux)
 	hostNet.cmd(command.stop_tcpdump())
-
+	time.sleep(10)
 	for host in listHosts:
 		for iface in host.iface:
 			command = Command(iface)
