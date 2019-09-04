@@ -58,10 +58,19 @@
 		"sourceIP": "192.168.0.2",
 		"destIP" : "10.0.0.2",
 		"protocol" : "tcp",
-		"sPort" : "*",
+		"sPort" : "45664",
 		"dPort" : "80",
 		"expected" : "deny"
-	}]
+	},
+	{
+		"sourceIP": "10.0.0.2",
+		"destIP" : "192.168.0.2",
+		"protocol" : "udp",
+		"sPort" : "*",
+		"dPort" : "80",
+		"expected" : "accept"
+	}
+]
 
 
 }
