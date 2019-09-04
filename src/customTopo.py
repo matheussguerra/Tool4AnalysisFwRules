@@ -255,17 +255,17 @@ def tests(net):
 			hostSourceLabel.cmd("ping -c 1 " + test.destinationIP)
 		
 
-	aux = listHosts[0].label
-	hostNet = net.getNodeByName(aux)
-	hostNet.cmd(command.stop_tcpdump())
-	time.sleep(10)
-	for host in listHosts:
-		for iface in host.iface:
-			command = Command(iface)
-			hostNET = net.getNodeByName(host.label)
-			hostNET.cmd(command.convertLogTcpdump())
-			time.sleep(1)
-			#hostNET.cmd("rm " + iface.name + ".log")
+		aux = listHosts[0].label
+		hostNet = net.getNodeByName(aux)
+		hostNet.cmd(command.stop_tcpdump())
+		time.sleep(10)
+		for host in listHosts:
+			for iface in host.iface:
+				command = Command(iface)
+				hostNET = net.getNodeByName(host.label)
+				hostNET.cmd(command.convertLogTcpdump())
+				time.sleep(1)
+				hostNET.cmd("rm " + iface.name + ".log")
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
 def emptyNet():

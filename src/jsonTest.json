@@ -67,7 +67,7 @@
 		"destIP" : "192.168.0.2",
 		"protocol" : "udp",
 		"sPort" : "*",
-		"dPort" : "80",
+		"dPort" : "2445",
 		"expected" : "accept"
 	}
 ]
