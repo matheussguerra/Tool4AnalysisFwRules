@@ -245,6 +245,7 @@ def tests(net):
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
 			time.sleep(10)
 		if(test.protocol == "udp"):
+			info("\n\n python udpServer.py " + test.destinationIP + ":" + test.destinationPort + "\n\n")
 			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort)
 			if(test.sourcePort == "*"):
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
