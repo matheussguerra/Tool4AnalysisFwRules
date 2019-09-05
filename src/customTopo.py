@@ -266,7 +266,7 @@ def tests(net):
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
 				time.sleep(1)
-				hostNET.cmd("rm " + iface.name + ".log")
+				#hostNET.cmd("rm " + iface.name + ".log")
 		
 				#analysisLog(host.label + "-" + iface.name + ".txt")
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
