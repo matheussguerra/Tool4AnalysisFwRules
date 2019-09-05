@@ -42,13 +42,13 @@ class Command():
 		return "ifconfig " + self.name + " " + self.ip
 
 	def start_tcpdump(self):
-		return "sudo tcpdump -n -l -i " + self.name + " -w " + self.name + ".log not arp &"
+		return "sudo tcpdump -nn -l -i " + self.name + " -w " + self.name + ".log not arp &"
 
 	def stop_tcpdump(self):
 		return "killall -1 tcpdump"
 
 	def convertLogTcpdump(self):
-		return "sudo tcpdump -r " + self.name + ".log >> " + self.name + ".txt"
+		return "sudo tcpdump -r " + self.name + ".log > " + self.name + ".txt"
 	
 
 
@@ -245,7 +245,6 @@ def tests(net):
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
 			time.sleep(10)
 		if(test.protocol == "udp"):
-			info("\n\n python udpServer.py " + test.destinationIP + ":" + test.destinationPort + "\n\n")
 			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort)
 			if(test.sourcePort == "*"):
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
@@ -259,14 +258,14 @@ def tests(net):
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
 		hostNet.cmd(command.stop_tcpdump())
-		time.sleep(10)
+		#time.sleep(10)
 		for host in listHosts:
 			for iface in host.iface:
 				command = Command(iface)
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
 				time.sleep(1)
-				#hostNET.cmd("rm " + iface.name + ".log")
+				hostNET.cmd("rm " + iface.name + ".log")
 		
 				#analysisLog(host.label + "-" + iface.name + ".txt")
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
