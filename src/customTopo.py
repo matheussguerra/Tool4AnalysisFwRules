@@ -144,7 +144,7 @@ class Tests:
 
 
 	def __str__(self):
-		return "Source IP: " + self.sourceIP + "\nDestination IP: " + self.destinationIP + "\nProtocol: " + self.protocol + "\nSource port: " + self.sourceIP + "\nDestination Port: " + self.destinationPort + "\nWhat i want?: " + self.expected
+		return "Source IP: " + self.sourceIP + "\nDestination IP: " + self.destinationIP + "\nProtocol: " + self.protocol + "\nSource port: " + self.sourcePort + "\nDestination Port: " + self.destinationPort + "\nWhat i want?: " + self.expected
 
 
 
@@ -216,7 +216,7 @@ def createTests(data):
 		dPort = data[i]["dPort"]
 		expected = data[i]["expected"]
 		listTests.append(Tests(sourceIP, destIP, protocol, sPort, dPort, expected))
-		info(sPort)
+		
 
 
 def tests(net):
