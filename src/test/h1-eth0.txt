@@ -1,0 +1,7 @@
+07:28:45.188087 IP 192.168.0.2.40488 > 10.0.0.2.http: Flags [S], seq 2640677990, win 29200, options [mss 1460,sackOK,TS val 2265700 ecr 0,nop,wscale 9], length 0
+07:28:46.191551 IP 192.168.0.2.40488 > 10.0.0.2.http: Flags [S], seq 2640677990, win 29200, options [mss 1460,sackOK,TS val 2265951 ecr 0,nop,wscale 9], length 0
+07:28:48.201021 IP 192.168.0.2.40488 > 10.0.0.2.http: Flags [S], seq 2640677990, win 29200, options [mss 1460,sackOK,TS val 2266453 ecr 0,nop,wscale 9], length 0
+09:00:36.966728 IP 10.0.0.2.39113 > 192.168.0.2.http: UDP, length 4
+09:00:36.966738 IP 192.168.0.2 > 10.0.0.2: ICMP 192.168.0.2 udp port http unreachable, length 40
+10:41:31.857838 IP 10.0.0.2.49120 > 192.168.0.2.domain: [|domain]
+10:41:31.857847 IP 192.168.0.2 > 10.0.0.2: ICMP 192.168.0.2 udp port domain unreachable, length 40

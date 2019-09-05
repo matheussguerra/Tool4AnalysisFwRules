@@ -267,7 +267,25 @@ def tests(net):
 				hostNET.cmd(command.convertLogTcpdump())
 				time.sleep(1)
 				hostNET.cmd("rm " + iface.name + ".log")
+		
+				#analysisLog(host.label + "-" + iface.name + ".txt")
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
+
+
+def analysisLog(log):
+	f = open(log, 'r')
+	for line in f:
+		line = line.split(' ')
+		time = line[0]
+		ip_field = line[1]
+		ip_source = line[2]
+		dest_symbol = line[3]
+		ip_dest = line[4]
+		protocol = line[5]
+		
+
+
+
 
 def emptyNet():
 	net = Mininet(controller=Controller)
