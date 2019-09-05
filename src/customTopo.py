@@ -42,13 +42,13 @@ class Command():
 		return "ifconfig " + self.name + " " + self.ip
 
 	def start_tcpdump(self):
-		return "sudo tcpdump -n -l -i " + self.name + " -w " + self.name + ".log not arp &"
+		return "sudo tcpdump -nn -l -i " + self.name + " -w " + self.name + ".log not arp &"
 
 	def stop_tcpdump(self):
 		return "killall -1 tcpdump"
 
 	def convertLogTcpdump(self):
-		return "sudo tcpdump -r " + self.name + ".log > " + self.name + ".txt"
+		return "sudo tcpdump -r " + self.name + ".log >> " + self.name + ".txt"
 	
 
 
@@ -267,20 +267,14 @@ def tests(net):
 				time.sleep(1)
 				hostNET.cmd("rm " + iface.name + ".log")
 		
-				#analysisLog(host.label + "-" + iface.name + ".txt")
+				analysisLog(host.label + "-" + iface.name + ".txt")
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
 
 def analysisLog(log):
 	f = open(log, 'r')
 	for line in f:
-		line = line.split(' ')
-		time = line[0]
-		ip_field = line[1]
-		ip_source = line[2]
-		dest_symbol = line[3]
-		ip_dest = line[4]
-		protocol = line[5]
+		print(line)
 		
 
 
