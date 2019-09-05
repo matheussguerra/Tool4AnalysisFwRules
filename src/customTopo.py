@@ -216,7 +216,7 @@ def createTests(data):
 		dPort = data[i]["dPort"]
 		expected = data[i]["expected"]
 		listTests.append(Tests(sourceIP, destIP, protocol, sPort, dPort, expected))
-
+		info(sPort)
 
 
 def tests(net):
