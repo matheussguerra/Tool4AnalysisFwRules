@@ -42,7 +42,7 @@ class Command():
 		return "ifconfig " + self.name + " " + self.ip
 
 	def start_tcpdump(self):
-		return "sudo tcpdump -i " + self.name + " -w " + self.name + ".log not arp &"
+		return "sudo tcpdump -n -l -i " + self.name + " -w " + self.name + ".log not arp &"
 
 	def stop_tcpdump(self):
 		return "killall -1 tcpdump"
