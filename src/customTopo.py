@@ -229,7 +229,7 @@ def startTcpdumAllIface(net):
 
 def tests(net):
 	for test in listTests:
-		info("Iniciando Tcpdump...")
+		info("Iniciando Tcpdump...\n")
 		startTcpdumAllIface(net)
 		info("Iniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
@@ -260,7 +260,7 @@ def tests(net):
 
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
-		hostNet.cmd(command.stop_tcpdump())
+		hostNet.cmd("killall -1 tcpdump")
 		time.sleep(5)
 		for host in listHosts:
 			for iface in host.iface:
