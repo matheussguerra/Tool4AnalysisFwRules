@@ -273,6 +273,7 @@ def tests(net):
 
 def analysisLog(log):
 	f = open(log, 'r')
+	print(log + "\n")
 	for line in f:
 		print(line)
 		
