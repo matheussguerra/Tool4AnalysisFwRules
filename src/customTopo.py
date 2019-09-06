@@ -217,9 +217,7 @@ def createTests(data):
 		expected = data[i]["expected"]
 		listTests.append(Tests(sourceIP, destIP, protocol, sPort, dPort, expected))
 		
-
-
-def tests(net):
+def startTcpdumAllIface():
 	for host in listHosts:
 		for iface in host.iface:
 			command = Command(iface)
@@ -227,7 +225,12 @@ def tests(net):
 			hostNET.cmd(command.start_tcpdump())
 			time.sleep(1)
 
+
+
+def tests(net):
 	for test in listTests:
+		info("Iniciando Tcpdump...")
+		startTcpdumAllIface()
 		info("Iniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
