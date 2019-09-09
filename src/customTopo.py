@@ -313,13 +313,14 @@ def analysisLog(log,test):
 
 	destHost = getHostDest(test)
 	f = open(destHost.name + ".txt")
+
 	if(test.sourceIP in f):
-		if(test.expected == "allow"):
+		if(test.expected == "accept"):
 			info("pass - os pacotes chegaram ao destino")
 		else:
 			info("fail - os pacotes não chegaram ao destino")
 	if(test.sourceIP not in f):
-		if(test.expected == "allow"):
+		if(test.expected == "accept"):
 			info("pass - os pacotes não chegaram ao destino")
 		else:
 			info("fail - os pacotes chegaram ao destino")
