@@ -310,8 +310,8 @@ def analysisLog(log,test):
 				path.append(interface)
 
 	f.close()
-	info("1")
 	destHost = getHostDest(test)
+	info("1")
 	f = open(destHost.name + ".txt")
 	info("2")
 	if(test.sourceIP in f):
