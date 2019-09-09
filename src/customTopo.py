@@ -322,7 +322,7 @@ def result(test):
 			info("\nfail - os pacotes não chegaram ao destino")
 
 	if(test.sourceIP not in f):
-		if(test.expected == "accept"):
+		if(test.expected == "deny"):
 			info("\npass - os pacotes não chegaram ao destino")
 		else:
 			info("\nfail - os pacotes chegaram ao destino")
