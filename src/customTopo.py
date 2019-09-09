@@ -15,6 +15,7 @@ listHosts = []		# Lista de hosts (node)
 listLink = []		# Lista de arestas (link entre hosts)
 listTests = [] 		# Lista de testes a ser realizado
 
+path = []
 
 
 class Command():
@@ -270,15 +271,28 @@ def tests(net):
 				time.sleep(1)
 				hostNET.cmd("rm " + iface.name + ".log")
 		
-				analysisLog(iface.name + ".txt")
+				analysisLog(iface.name + ".txt", test)
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
-def analysisLog(log):
+def analysisLog(log,test):
 	f = open(log, 'r')
 	for line in f:
 		line = line.split(' ')
 		if("ICMP" in line):
 			pass
+		elif("Flags" in line):
+			source = line[2].split('.')
+			if(len(source) > 4):
+				port_source = source[4]
+				ip_source = source[0] + "." + source[1] + "." + source[2] + "." + source[3]
+			
+			dest = line[4].split('.')
+			if(len(dest) > 4):
+				port_dest = dest[4].replace(":","")
+				ip_dest = dest[0] + "." + dest[1] + "." + dest[2] + "." + dest[3]
+
+			print("de: " + ip_source + ":" + port_source + " para: " + ip_dest + ":" + port_dest)
+
 		else:
 			source = line[2].split('.')
 			if(len(source) > 4):
@@ -291,11 +305,33 @@ def analysisLog(log):
 				ip_dest = dest[0] + "." + dest[1] + "." + dest[2] + "." + dest[3]
 
 			print("de: " + ip_source + ":" + port_source + " para: " + ip_dest + ":" + port_dest)
-			
+			if(ip_source == test.sourceIP):
+				interface = log.split('.')[0]
+				path.append(interface)
+
+	f.close()
+
+	destHost = getHostDest(test)
+	f = open(destHost.name + ".txt")
+	if(test.sourceIP in f):
+		if(test.expected == "allow"):
+			info("pass - os pacotes chegaram ao destino")
+		else:
+			info("fail - os pacotes não chegaram ao destino")
+	if(test.sourceIP not in f):
+		if(test.expected == "allow"):
+			info("pass - os pacotes não chegaram ao destino")
+		else:
+			info("fail - os pacotes chegaram ao destino")
+
+		
 		
 
-
-
+def getHostDest(test):
+	for host in listHosts:
+		for interface in host.iface:
+			if(interface.ip == test.destinationIP):
+				return host.iface[interface]
 
 def emptyNet():
 	net = Mininet(controller=Controller)
