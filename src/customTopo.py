@@ -333,8 +333,8 @@ def analysisLog(log,test):
 def getHostDest(test):
 	for host in listHosts:
 		for interface in host.iface:
-			info(interface.ip + " " + test.destinationIP)
-			#info(host.iface[interface])
+			if(interface.ip == test.destinationIP):
+				return(host.interface)
 
 def emptyNet():
 	net = Mininet(controller=Controller)
