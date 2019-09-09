@@ -334,8 +334,8 @@ def getHostDest(test):
 	for host in listHosts:
 		for interface in host.iface:
 			info("get host")
-			if(interface.ip == test.destinationIP):
-				return host.iface[interface]
+			info(interface.ip + " " + test.destinationIP)
+			return host.iface[interface]
 
 def emptyNet():
 	net = Mininet(controller=Controller)
