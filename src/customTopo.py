@@ -304,8 +304,9 @@ def analysisLog(log,test):
 				port_dest = dest[4].replace(":","")
 				ip_dest = dest[0] + "." + dest[1] + "." + dest[2] + "." + dest[3]
 
-			print("de: " + ip_source + ":" + port_source + " para: " + ip_dest + ":" + port_dest)
+			#print("de: " + ip_source + ":" + port_source + " para: " + ip_dest + ":" + port_dest)
 			if(ip_source == test.sourceIP):
+				info("1")
 				interface = log.split('.')[0]
 				path.append(interface)
 
@@ -313,12 +314,14 @@ def analysisLog(log,test):
 
 	destHost = getHostDest(test)
 	f = open(destHost.name + ".txt")
-
+	info("2")
 	if(test.sourceIP in f):
 		if(test.expected == "accept"):
 			info("pass - os pacotes chegaram ao destino")
 		else:
 			info("fail - os pacotes não chegaram ao destino")
+	
+	info("3")
 	if(test.sourceIP not in f):
 		if(test.expected == "accept"):
 			info("pass - os pacotes não chegaram ao destino")
