@@ -42,13 +42,13 @@ class Command():
 		return "ifconfig " + self.name + " " + self.ip
 
 	def start_tcpdump(self):
-		return "sudo tcpdump -nn -l -i " + self.name + " -w " + self.name + ".log not arp &"
+		return "sudo tcpdump -n -l -i " + self.name + " -w " + self.name + ".log not arp &"
 
 	def stop_tcpdump(self):
 		return "killall -1 tcpdump"
 
 	def convertLogTcpdump(self):
-		return "sudo tcpdump -r " + self.name + ".log >> " + self.name + ".txt"
+		return "sudo tcpdump -r " + self.name + ".log > " + self.name + ".txt"
 	
 
 
@@ -273,12 +273,25 @@ def tests(net):
 				analysisLog(iface.name + ".txt")
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
-
 def analysisLog(log):
 	f = open(log, 'r')
-	print(log + "\n")
 	for line in f:
-		print(line)
+		line = line.split(' ')
+		if("ICMP" in line):
+			pass
+		else:
+			source = line[2].split('.')
+			if(len(source) > 4):
+				port_source = source[4]
+				ip_source = source[0] + "." + source[1] + "." + source[2] + "." + source[3]
+			
+			dest = line[4].split('.')
+			if(len(dest) > 4):
+				port_dest = dest[4].replace(":","")
+				ip_dest = dest[0] + "." + dest[1] + "." + dest[2] + "." + dest[3]
+
+			print("de: " + ip_source + ":" + port_source + " para: " + ip_dest + ":" + port_dest)
+			
 		
 
 
