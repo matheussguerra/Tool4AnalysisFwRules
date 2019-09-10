@@ -319,6 +319,7 @@ def result(test):
 	destHost = getHostDest(test)
 	f = open(destHost.name + ".txt")
 	log = f.read()
+	info(log)
 	if(test.sourceIP in log):
 		if(test.expected == "accept"):
 			info("\npass - os pacotes chegaram ao destino")

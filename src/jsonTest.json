@@ -37,7 +37,7 @@
 					"ip" : "10.0.0.1",
 					"mask" : "255.255.255.0",
 					"gw" : "0.0.0.0"}],
-			"fwCommand": ["iptables -F"]
+			"fwCommand": ["iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"]
 			}
 		],
 	
