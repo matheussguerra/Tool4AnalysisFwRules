@@ -310,9 +310,10 @@ def analysisLog(log,test):
 			#print("de: " + ip_source + ":" + port_source + " para: " + ip_dest + ":" + port_dest)
 			if(ip_source == test.sourceIP):
 				interface = log.split('.')[0]
-				path.append(interface)
+				path.append([line[0], interface])
 
 	f.close()
+	path.sort()
 	info(path)
 
 def result(test):

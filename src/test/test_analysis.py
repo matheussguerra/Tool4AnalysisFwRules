@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+tTime = []
 
-
+i =0
 
 f = open("r1-eth0.txt", 'r')
 for line in f:
@@ -22,3 +23,9 @@ for line in f:
 
         print("de: " + ip_source + ":" + port_source + " para: " + ip_dest + ":" + port_dest)
 
+    
+    tTime.append([line[0], i])
+    i = i+1
+
+tTime.sort()
+print(tTime)
