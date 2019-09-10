@@ -291,7 +291,7 @@ def analysisLog(log,test, path):
 				port_dest = dest[4].replace(":","")
 				ip_dest = dest[0] + "." + dest[1] + "." + dest[2] + "." + dest[3]
 			
-			#print("de: " + ip_source + ":" + port_source + " para: " + ip_dest + ":" + port_dest)
+			
 			if(ip_source == test.sourceIP):
 				interface = log.split('.')[0]
 				path.append([line[0],interface])
@@ -307,8 +307,10 @@ def analysisLog(log,test, path):
 			if(len(dest) > 4):
 				port_dest = dest[4].replace(":","")
 				ip_dest = dest[0] + "." + dest[1] + "." + dest[2] + "." + dest[3]
-
-			#print("de: " + ip_source + ":" + port_source + " para: " + ip_dest + ":" + port_dest)
+			
+			if(ip_source == test.sourceIP):
+				interface = log.split('.')[0]
+				path.append([line[0],interface])
 
 	f.close()
 
