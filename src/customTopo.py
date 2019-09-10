@@ -319,13 +319,13 @@ def result(test):
 	destHost = getHostDest(test)
 	f = open(destHost.name + ".txt")
 	log = f.read()
-	if(test.sourceIP in f):
+	if(test.sourceIP in log):
 		if(test.expected == "accept"):
 			info("\npass - os pacotes chegaram ao destino")
 		else:
 			info("\nfail - os pacotes não chegaram ao destino")
 
-	if(test.sourceIP not in f):
+	if(test.sourceIP not in log):
 		if(test.expected == "deny"):
 			info("\npass - os pacotes não chegaram ao destino")
 		else:
