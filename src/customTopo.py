@@ -43,7 +43,7 @@ class Command():
 		return "ifconfig " + self.name + " " + self.ip
 
 	def start_tcpdump(self):
-		return "sudo tcpdump -n -l -i " + self.name + " -w " + self.name + ".log not arp &"
+		return "sudo tcpdump  -tt -n -l -i " + self.name + " -w " + self.name + ".log not arp &"
 
 	def stop_tcpdump(self):
 		return "killall -1 tcpdump"
@@ -277,6 +277,7 @@ def tests(net):
 
 def analysisLog(log,test):
 	path = []
+	i = 0
 	f = open(log, 'r')
 	for line in f:
 		line = line.split(' ')
