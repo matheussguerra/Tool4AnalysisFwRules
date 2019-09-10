@@ -230,9 +230,9 @@ def startTcpdumAllIface(net):
 
 def tests(net):
 	for test in listTests:
-		info("Iniciando Tcpdump...\n")
+		info("\nIniciando Tcpdump...\n")
 		startTcpdumAllIface(net)
-		info("Iniciando teste:\n---\n" + str(test) + "\n---\n")
+		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
 			if test.destinationIP in host.iface[0].ip:
@@ -276,6 +276,7 @@ def tests(net):
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
 def analysisLog(log,test):
+	path = []
 	f = open(log, 'r')
 	for line in f:
 		line = line.split(' ')
@@ -311,6 +312,7 @@ def analysisLog(log,test):
 				path.append(interface)
 
 	f.close()
+	info(path)
 
 def result(test):
 	destHost = getHostDest(test)
@@ -326,7 +328,7 @@ def result(test):
 			info("\npass - os pacotes não chegaram ao destino")
 		else:
 			info("\nfail - os pacotes chegaram ao destino")
-
+	f.close()
 		
 		
 
