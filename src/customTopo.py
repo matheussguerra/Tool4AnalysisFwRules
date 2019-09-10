@@ -256,12 +256,11 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -c 1 " + test.destinationIP)
 		
-
+		PATH = []
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
 		hostNet.cmd("killall -1 tcpdump")
 		time.sleep(5)
-		path = []
 		for host in listHosts:
 			for iface in host.iface:
 				command = Command(iface)
@@ -269,11 +268,11 @@ def tests(net):
 				hostNET.cmd(command.convertLogTcpdump())
 				time.sleep(1)
 				hostNET.cmd("rm " + iface.name + ".log")
-				analysisLog(iface.name + ".txt", test, path)
+				analysisLog(iface.name + ".txt", test)
 		result(test)
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
-def analysisLog(log,test, path):
+def analysisLog(log,test):
 	f = open(log, 'r')
 	for line in f:
 		line = line.split(' ')
@@ -306,12 +305,12 @@ def analysisLog(log,test, path):
 			#print("de: " + ip_source + ":" + port_source + " para: " + ip_dest + ":" + port_dest)
 			if(ip_source == test.sourceIP):
 				interface = log.split('.')[0]
-				path.append([line[0], interface])
+				PATH.append(line[0])
 
 	f.close()
-	path.sort()
-	info(path)
-	path = []
+	PATH.sort()
+	info(PATH)
+
 
 def result(test):
 	destHost = getHostDest(test)
