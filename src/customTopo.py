@@ -270,6 +270,7 @@ def tests(net):
 				hostNET.cmd("rm " + iface.name + ".log")
 				analysisLog(iface.name + ".txt", test, path)
 		path.sort()
+		info(path)
 		result(test)
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
@@ -306,7 +307,7 @@ def analysisLog(log,test, path):
 			#print("de: " + ip_source + ":" + port_source + " para: " + ip_dest + ":" + port_dest)
 			if(ip_source == test.sourceIP):
 				interface = log.split('.')[0]
-				path.append(line[0])
+				path.append([line[0],interface])
 
 	f.close()
 
