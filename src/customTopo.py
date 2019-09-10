@@ -15,8 +15,6 @@ listHosts = []		# Lista de hosts (node)
 listLink = []		# Lista de arestas (link entre hosts)
 listTests = [] 		# Lista de testes a ser realizado
 
-path = []
-
 
 class Command():
 	"""
@@ -263,6 +261,7 @@ def tests(net):
 		hostNet = net.getNodeByName(aux)
 		hostNet.cmd("killall -1 tcpdump")
 		time.sleep(5)
+		path = []
 		for host in listHosts:
 			for iface in host.iface:
 				command = Command(iface)
@@ -270,14 +269,11 @@ def tests(net):
 				hostNET.cmd(command.convertLogTcpdump())
 				time.sleep(1)
 				hostNET.cmd("rm " + iface.name + ".log")
-		
-				analysisLog(iface.name + ".txt", test)
+				analysisLog(iface.name + ".txt", test, path)
 		result(test)
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
-def analysisLog(log,test):
-	path = []
-	i = 0
+def analysisLog(log,test, path):
 	f = open(log, 'r')
 	for line in f:
 		line = line.split(' ')
@@ -315,6 +311,7 @@ def analysisLog(log,test):
 	f.close()
 	path.sort()
 	info(path)
+	path = []
 
 def result(test):
 	destHost = getHostDest(test)
