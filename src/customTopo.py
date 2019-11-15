@@ -49,8 +49,8 @@ class Command():
 		return "killall -1 tcpdump"
 
 	def convertLogTcpdump(self):
-		#return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"
-		return "sudo tcpdump -n -r " + self.name + ".log >> log.txt"
+		return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"
+		#return "sudo tcpdump -n -r " + self.name + ".log >> log.txt"
 	
 
 
@@ -251,14 +251,12 @@ def tests(net):
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
-			#time.sleep(1)
 		if(test.protocol == "udp"):
 			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort)
 			if(test.sourcePort == "*"):
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
-				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
-			#time.sleep(1)
+				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)			#time.sleep(1)
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 		time.sleep(1)
@@ -327,9 +325,6 @@ def analysisLog(log,test, path):
 				path.append([line[0],interface])
 
 	f.close()
-	fim = timeit.default_timer()
-	info("\n ANALISE DO LOG EM: " + str(fim - inicio) + '\n')
-
 
 def result(test):
 	destHost = getHostDest(test)
