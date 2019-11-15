@@ -47,11 +47,11 @@ class Command():
 		return "killall -1 tcpdump"
 
 	def convertLogTcpdump(self):
-		return "sudo tcpdump -r " + self.name + ".log > " + self.name + ".txt"
+		return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"
 	
 
 
-class Host:
+class Host():
 	"""
 	Esta classe tem por objetivo abstrair um host, contendo os atributos necessários para configuração do mesmo.
 	Type: é o tipo do host, que pode ser usado como um host simples ou roteador (host|router).
