@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html ng-app="tcc">
+
+<head>
+
+  <meta charset="utf-8">
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/konva@4.0.13/konva.min.js"></script>
+
+  <script>
+    angular.module("tcc", []);
+    angular.module("tcc").controller("tcc-Ctrl", function($scope){
+      $scope.app = "TCC";
+
+  
+      $scope.nodes = [];
+      $scope.links = [];
+      $scope.tests = [];
+
+      $scope.addNode = function(node){
+        $scope.nodes.push(angular.copy(node));
+        $scope.nodes[$scope.nodes.length - 1].iface = [];
+        delete $scope.node;
+        var imageObj = new Image();
+      imageObj.onload = function() {
+        var yoda = new Konva.Image({
+          x: 50,
+          y: 50,
+          image: imageObj,
+          width: 50,
+          height: 50,
+          draggable: true,
+          id:node.label,
+          text: node.label
+
+        });
+
+        // add the shape to the layer
+        layer.add(yoda);
+        layer.batchDraw();
+      };
+      imageObj.src = 'img/desk.jpg';
+      };
+
+      $scope.addIface = function(iface){
+        angular.forEach($scope.nodes, function(value,key){
+          if(value.label == iface.name){
+            console.log(value.label);
+            iface.name = iface.name + '-eth' + value.iface.length;
+            console.log(iface.name);
+            value.iface.push(angular.copy(iface));
+          }         
+        });
+        
+        delete $scope.iface;
+      }
+
+      
+    });
+  </script>
+
+  <title>TCC</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body ng-controller="tcc-Ctrl">
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading" ng-bind="app">
+        {{app}}
+      </div>
+      <div class="form" id="form">
+        <div id=form-title>
+          Node attributes
+        </div>
+            <form id="form-in">
+              {{node}}
+                <div>
+                    <input type="radio" name="type" value="host" ng-model="node.type"> Host<br>
+                    <input type="radio" name="type" value="router" ng-model="node.type"> Router<br>
+                </div>
+                <div>
+                    <label id=form-label>Label</label>
+                    <input type="text" class="form-control" id="nodeId" placeholder="Ex: h1" ng-model="node.label">
+                </div>
+                <div>
+                    <label id="form-label">DNS</label>
+                    <input type="text" class="form-control" id="nodeDNS" placeholder="DNS address" ng-model="node.dns">
+                </div>
+                <div>
+                    <label id="form-label">Firewall rules</label>
+                    <textarea class="form-control" name="fwrules" id="fwrules" cols="10" rows="10" ng-model="node.fwrules"></textarea>
+                </div>               
+              <button style="margin: 10%; padding: 3%; margin-left: 25%" class="btn btn-primary" ng-click="addNode(node)">Create Host</button>              
+            </form>
+
+            <div id="form-sec">
+              <form style="border: 1px solid black;" id="form-in">
+                  <div>
+                    <select class="form-control" ng-model="iface.name" ng-options="node.label as node.label for node in nodes">
+                      <option value="">Selecione um Host</option>
+                    </select>
+                  </div>
+                  <div>
+                      <label id="form-label">IP</label>
+                      <input type="text" class="form-control" id="ip" ng-model="iface.ip">
+                  </div>
+                  <div>
+                      <label id="form-label">Mask</label>
+                      <input type="text" class="form-control" id="mask" ng-model="iface.mask">
+                  </div>
+                  <div>
+                      <label id="form-label">Gateway</label>
+                      <input type="text" class="form-control" id="gw" ng-model="iface.gw">
+                  </div>
+                  {{iface}}
+                  <div>
+                      <button style="margin-top: 5%; padding: 2%; margin-left: 15%" class="btn btn-primary" ng-click="addIface(iface)">Create interface</button>
+                  </div>
+              </form>
+          </div> 
+        </div>
+
+
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="jumbotron">
+        <h3>{{app}}</h3>
+        <table ng-show="nodes.length > 0" class="table">
+          <tr>
+            <th>Type</th>
+            <th>Label</th>
+            <th>DNS</th>
+            <th>Firewall</th>
+            <th>Ifaces</th>
+          </tr>
+          <tr ng-repeat="node in nodes">
+            <td>{{node.type}}</td>
+            <td>{{node.label}}</td>
+            <td>{{node.dns}}</td>
+            <td>{{node.fwrules}}</td>
+            <td>{{node.iface}}</td>
+            <td><div style="width: 20px; height: 20px;"></div></td>
+          </tr>
+        </table>
+        <hr/>
+      </div>
+
+      
+      <div class="container-fluid">
+          <div id="container" style="margin: 0%; border: 1px solid black;">
+          </div>
+          <script>
+            var content = document.getElementById("page-content-wrapper");
+            var width = content.offsetWidth;
+            var height = content.offsetHeight
+      
+            var stage = new Konva.Stage({
+              container: 'container',
+              width: width,
+              height: height
+            });
+      
+            var layer = new Konva.Layer();
+            stage.add(layer);
+
+          </script>
+      
+      </div>
+    <!-- /#page-content-wrapper -->
+  </div>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>
+

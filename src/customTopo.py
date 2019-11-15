@@ -50,6 +50,7 @@ class Command():
 
 	def convertLogTcpdump(self):
 		return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"
+		#return "sudo tcpdump -n -r " + self.name + ".log >> log.txt"
 	
 
 
