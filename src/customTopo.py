@@ -234,7 +234,7 @@ def tests(net):
 		info("\nIniciando Tcpdump...\n")
 		startTcpdumAllIface(net)
 		fim = timeit.default_timer()
-		info("tcpdump inicializado em: " + fim -inicio)
+		info("tcpdump inicializado em: " + str(fim -inicio))
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
