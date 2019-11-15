@@ -9,6 +9,8 @@ from mininet.node import OVSSwitch, Controller, RemoteController
 import time
 import os
 import json
+import time
+import timeit
 
 
 listHosts = []		# Lista de hosts (node)
@@ -228,8 +230,11 @@ def startTcpdumAllIface(net):
 
 def tests(net):
 	for test in listTests:
+		inicio = timeit.default_timer()
 		info("\nIniciando Tcpdump...\n")
 		startTcpdumAllIface(net)
+		fim = timeit.default_timer()
+		info("tcpdump inicializado em: " + fim -inicio)
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
@@ -272,6 +277,8 @@ def tests(net):
 		path.sort()
 		info(path)
 		result(test)
+		fim = timeit.default_timer()
+	
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
 def analysisLog(log,test, path):
