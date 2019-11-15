@@ -263,7 +263,7 @@ def tests(net):
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
 		hostNet.cmd("killall -1 tcpdump")
-		#time.sleep(1)
+		time.sleep(1)
 		for host in listHosts:
 			for iface in host.iface:
 				command = Command(iface)
