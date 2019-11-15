@@ -50,6 +50,7 @@ class Command():
 
 	def convertLogTcpdump(self):
 		#return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"
+		
 		return "sudo tcpdump -n -r " + self.name + ".log >> log.txt"
 	
 
@@ -279,7 +280,7 @@ def tests(net):
 		hostNet.cmd("echo >>> log.txt")
 		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
 		analysisLog("log.txt", test, path)
-		hostNet.cmd("rm log.txt")
+		#hostNet.cmd("rm log.txt")
 		numTest = numTest + 1
 		path.sort()
 		info(path)
