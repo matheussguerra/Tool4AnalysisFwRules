@@ -253,14 +253,14 @@ def tests(net):
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
-			time.sleep(1)
+			#time.sleep(1)
 		if(test.protocol == "udp"):
 			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort)
 			if(test.sourcePort == "*"):
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
-			time.sleep(1)
+			#time.sleep(1)
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 		fim = timeit.default_timer()
@@ -272,13 +272,13 @@ def tests(net):
 		hostNet.cmd("killall -1 tcpdump")
 		fim = timeit.default_timer()
 		info("finalizou o tcpdump em: " + str(fim - inicio) + '\n')
-		time.sleep(1)
+		#time.sleep(1)
 		for host in listHosts:
 			for iface in host.iface:
 				command = Command(iface)
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
-				time.sleep(1)
+				#time.sleep(1)
 				hostNET.cmd("rm " + iface.name + ".log")
 				analysisLog(iface.name + ".txt", test, path)
 		fim = timeit.default_timer()
