@@ -263,6 +263,7 @@ def tests(net):
 			#time.sleep(1)
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
+		time.sleep(1)
 		fim = timeit.default_timer()
 		info("realizou os testes em: " + str(fim - inicio) + '\n')
 		
