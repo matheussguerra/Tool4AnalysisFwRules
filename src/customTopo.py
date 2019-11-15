@@ -250,14 +250,14 @@ def tests(net):
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
-			time.sleep(10)
+			time.sleep(1)
 		if(test.protocol == "udp"):
 			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort)
 			if(test.sourcePort == "*"):
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
-			time.sleep(10)
+			time.sleep(1)
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 		
@@ -265,7 +265,7 @@ def tests(net):
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
 		hostNet.cmd("killall -1 tcpdump")
-		time.sleep(5)
+		time.sleep(1)
 		for host in listHosts:
 			for iface in host.iface:
 				command = Command(iface)
