@@ -275,7 +275,7 @@ def tests(net):
 				time.sleep(1)
 				#hostNET.cmd("rm " + iface.name + ".log")
 				analysisLog(iface.name + ".txt", test, path)
-		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + numTest)
+		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
 		numTest = numTest + 1
 		path.sort()
 		info(path)
