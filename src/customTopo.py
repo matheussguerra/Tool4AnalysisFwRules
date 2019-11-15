@@ -272,7 +272,7 @@ def tests(net):
 		hostNet.cmd("killall -1 tcpdump")
 		fim = timeit.default_timer()
 		info("finalizou o tcpdump em: " + str(fim - inicio) + '\n')
-		#time.sleep(1)
+		time.sleep(1)
 		for host in listHosts:
 			for iface in host.iface:
 				command = Command(iface)
