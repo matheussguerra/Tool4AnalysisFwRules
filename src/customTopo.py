@@ -234,7 +234,7 @@ def tests(net):
 		info("\nIniciando Tcpdump...\n")
 		startTcpdumAllIface(net)
 		fim = timeit.default_timer()
-		info("tcpdump inicializado em: " + str(fim -inicio))
+		info("tcpdump inicializado em: " + str(fim -inicio) + '\n')
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
@@ -244,6 +244,9 @@ def tests(net):
 				hostSourceLabel = net.getNodeByName(host.label)
 			else:
 				pass
+		fim = timeit.default_timer()
+		info("obteve origem e desitino  (teste) em:" + str(fim - inicio) + '\n')
+
 		if(test.protocol == "tcp"):
 			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort)
 			if(test.sourcePort == "*"):
@@ -260,11 +263,15 @@ def tests(net):
 			time.sleep(1)
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
+		fim = timeit.default_timer()
+		info("realizou os testes em: " str(fim - inicio) + '\n')
 		
 		path = []
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
 		hostNet.cmd("killall -1 tcpdump")
+		fim = timeit.default_timer()
+		info("finalizou o tcpdump em: " + str(fim - inicio) + '\n')
 		time.sleep(1)
 		for host in listHosts:
 			for iface in host.iface:
@@ -274,10 +281,13 @@ def tests(net):
 				time.sleep(1)
 				hostNET.cmd("rm " + iface.name + ".log")
 				analysisLog(iface.name + ".txt", test, path)
+		fim = timeit.default_timer()
+		info("analisou os logs em: " + str(fim - inicio) + '\n')
 		path.sort()
 		info(path)
 		result(test)
 		fim = timeit.default_timer()
+		info("apresentou os resultados em: " + str(fim - inicio) + '\n')
 	
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
