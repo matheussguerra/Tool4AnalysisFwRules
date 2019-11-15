@@ -49,8 +49,8 @@ class Command():
 		return "killall -1 tcpdump"
 
 	def convertLogTcpdump(self):
-		return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"
-		#return "sudo tcpdump -n -r " + self.name + ".log >> log.txt"
+		#return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"
+		return "sudo tcpdump -n -r " + self.name + ".log >> log.txt"
 	
 
 
@@ -230,6 +230,7 @@ def startTcpdumAllIface(net):
 
 
 def tests(net):
+	numTest = 1
 	for test in listTests:
 		inicio = timeit.default_timer()
 		info("\nIniciando Tcpdump...\n")
@@ -263,6 +264,8 @@ def tests(net):
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
 		hostNet.cmd("killall -1 tcpdump")
+		hostNet.cmd("touch log.txt")
+		hostNet.cmd("mkdir teste" + str(numTest))
 		time.sleep(1)
 		for host in listHosts:
 			for iface in host.iface:
@@ -270,8 +273,10 @@ def tests(net):
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
 				time.sleep(1)
-				hostNET.cmd("rm " + iface.name + ".log")
+				#hostNET.cmd("rm " + iface.name + ".log")
 				analysisLog(iface.name + ".txt", test, path)
+		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + numTest)
+		numTest = numTest + 1
 		path.sort()
 		info(path)
 		result(test)
