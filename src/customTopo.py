@@ -254,7 +254,7 @@ def tests(net):
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
 			time.sleep(10)
 		if(test.protocol == "icmp"):
-			hostSourceLabel.cmd("ping -c 1 " + test.destinationIP)
+			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 		
 		path = []
 		aux = listHosts[0].label
