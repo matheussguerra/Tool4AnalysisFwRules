@@ -49,8 +49,8 @@ class Command():
 		return "killall -1 tcpdump"
 
 	def convertLogTcpdump(self):
-		return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"
-		#return "sudo tcpdump -n -r " + self.name + ".log >> log.txt"
+		#return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"
+		return "sudo tcpdump -n -r " + self.name + ".log >> log.txt"
 	
 
 
@@ -226,7 +226,7 @@ def startTcpdumAllIface(net):
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
 			hostNET.cmd(command.start_tcpdump())
-			time.sleep(1)
+			#time.sleep(1)
 
 
 def tests(net):
