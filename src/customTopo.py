@@ -267,15 +267,15 @@ def tests(net):
 		hostNet.cmd("touch log.txt")
 		hostNet.cmd("mkdir teste" + str(numTest))
 		time.sleep(1)
-		#for host in listHosts:
-			#for iface in host.iface:
-				#command = Command(iface)
-				#hostNET = net.getNodeByName(host.label)
-				#hostNET.cmd(command.convertLogTcpdump())
+		for host in listHosts:
+			for iface in host.iface:
+				command = Command(iface)
+				hostNET = net.getNodeByName(host.label)
+				hostNET.cmd(command.convertLogTcpdump())
 				#time.sleep(1)
 				#hostNET.cmd("rm " + iface.name + ".log")
 				#analysisLog(iface.name + ".txt", test, path)
-		hostNet.cmd("sudo tcpdump -n -r " + self.name + ".log >> log.txt")
+		#hostNet.cmd("sudo tcpdump -n -r " + self.name + ".log >> log.txt")
 		hostNet.cmd("echo >>> log.txt")
 		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
 		analysisLog("log.txt", test, path)
