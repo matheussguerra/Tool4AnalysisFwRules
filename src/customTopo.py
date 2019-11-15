@@ -264,7 +264,7 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 		fim = timeit.default_timer()
-		info("realizou os testes em: " str(fim - inicio) + '\n')
+		info("realizou os testes em: " + str(fim - inicio) + '\n')
 		
 		path = []
 		aux = listHosts[0].label
