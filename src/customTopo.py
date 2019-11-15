@@ -234,8 +234,6 @@ def tests(net):
 		inicio = timeit.default_timer()
 		info("\nIniciando Tcpdump...\n")
 		startTcpdumAllIface(net)
-		fim = timeit.default_timer()
-		info("tcpdump inicializado em: " + str(fim -inicio) + '\n')
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
@@ -265,7 +263,7 @@ def tests(net):
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
 		hostNet.cmd("killall -1 tcpdump")
-		time.sleep(1)
+		#time.sleep(1)
 		for host in listHosts:
 			for iface in host.iface:
 				command = Command(iface)
@@ -274,20 +272,16 @@ def tests(net):
 				time.sleep(1)
 				hostNET.cmd("rm " + iface.name + ".log")
 				analysisLog(iface.name + ".txt", test, path)
-		fim = timeit.default_timer()
-		info("analisou os logs em: " + str(fim - inicio) + '\n')
 		path.sort()
 		info(path)
 		result(test)
+		fim = timeit.default_timer()
+		info("\nteste realizado em: " + str(fim -inicio) + '\n')
 	
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
 def analysisLog(log,test, path):
-	inicio = timeit.default_timer()
 	f = open(log, 'r')
-	fim = timeit.default_timer()
-	info("\n ABRIU O ARQUIVO DO LOG EM: " + str(fim - inicio) + '\n')
-
 	for line in f:
 		line = line.split(' ')
 		if("ICMP" in line):
