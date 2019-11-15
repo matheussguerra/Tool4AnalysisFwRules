@@ -278,7 +278,7 @@ def tests(net):
 				command = Command(iface)
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
-				#time.sleep(1)
+				time.sleep(1)
 				hostNET.cmd("rm " + iface.name + ".log")
 				analysisLog(iface.name + ".txt", test, path)
 		fim = timeit.default_timer()
