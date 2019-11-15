@@ -244,9 +244,6 @@ def tests(net):
 				hostSourceLabel = net.getNodeByName(host.label)
 			else:
 				pass
-		fim = timeit.default_timer()
-		info("obteve origem e desitino  (teste) em:" + str(fim - inicio) + '\n')
-
 		if(test.protocol == "tcp"):
 			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort)
 			if(test.sourcePort == "*"):
@@ -264,15 +261,11 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 		time.sleep(1)
-		fim = timeit.default_timer()
-		info("realizou os testes em: " + str(fim - inicio) + '\n')
 		
 		path = []
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
 		hostNet.cmd("killall -1 tcpdump")
-		fim = timeit.default_timer()
-		info("finalizou o tcpdump em: " + str(fim - inicio) + '\n')
 		time.sleep(1)
 		for host in listHosts:
 			for iface in host.iface:
@@ -287,13 +280,15 @@ def tests(net):
 		path.sort()
 		info(path)
 		result(test)
-		fim = timeit.default_timer()
-		info("apresentou os resultados em: " + str(fim - inicio) + '\n')
 	
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
 def analysisLog(log,test, path):
+	inicio = timeit.default_timer()
 	f = open(log, 'r')
+	fim = timeit.default_timer()
+	info("\n ABRIU O ARQUIVO DO LOG EM: " + str(fim - inicio) + '\n')
+
 	for line in f:
 		line = line.split(' ')
 		if("ICMP" in line):
@@ -331,6 +326,8 @@ def analysisLog(log,test, path):
 				path.append([line[0],interface])
 
 	f.close()
+	fim = timeit.default_timer()
+	info("\n ANALISE DO LOG EM: " + str(fim - inicio) + '\n')
 
 
 def result(test):
