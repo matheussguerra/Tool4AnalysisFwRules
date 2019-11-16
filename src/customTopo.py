@@ -47,7 +47,7 @@ class Command():
 		return "killall -1 tcpdump"
 
 	def convertLogTcpdump(self):
-		return "sudo tcpdump -r " + self.name + ".log > " + self.name + ".txt"
+		return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"
 	
 
 
@@ -254,7 +254,7 @@ def tests(net):
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
 			time.sleep(10)
 		if(test.protocol == "icmp"):
-			hostSourceLabel.cmd("ping -c 1 " + test.destinationIP)
+			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 		
 		path = []
 		aux = listHosts[0].label
