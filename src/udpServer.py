@@ -21,15 +21,9 @@ orig = (ip, port)
 udp.bind(orig)
 msg, cliente = udp.recvfrom(1024)
 print(str(cliente) + ":" + str(msg))
-f = open('log.txt', 'a+')
 if(msg == 'test'):
-    f.write('udp-Server:connected\n')    
-    #print('conectou')
-
+    print('conectou')
+    udp.close()
 else:
-    f.write('udp-Server:notConnected\n')
-    #print('erro')
-
-
-f.close()
-udp.close()
+    print('erro')
+    udp.close()
