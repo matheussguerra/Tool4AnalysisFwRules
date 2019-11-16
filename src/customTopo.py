@@ -50,7 +50,7 @@ class Command():
 
 	def convertLogTcpdump(self):
 		#return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"		
-		return "sudo tcpdump -tt -n -r " + self.name + ".log >> log.txt"
+		return "sudo tcpdump -n -tt -r " + self.name + ".log >> log.txt"
 	
 
 
@@ -249,12 +249,10 @@ def tests(net):
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
-		if(test.protocol == "udp"):
-			info("ligando sv")
+		if(test.protocol == "udp"):			
 			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort + "&")
 			time.sleep(0.6)
-			if(test.sourcePort == "*"):
-				info("ligando client")
+			if(test.sourcePort == "*"):				
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
