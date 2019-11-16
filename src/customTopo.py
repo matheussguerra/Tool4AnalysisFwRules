@@ -43,14 +43,14 @@ class Command():
 		return "ifconfig " + self.name + " " + self.ip
 
 	def start_tcpdump(self):
-		return "sudo tcpdump -ttt -n -i " + self.name + " -w " + self.name + ".log not arp &"
+		return "sudo tcpdump -tt -n -i " + self.name + " -w " + self.name + ".log not arp &"
 
 	def stop_tcpdump(self):
 		return "killall -1 tcpdump"
 
 	def convertLogTcpdump(self):
 		#return "sudo tcpdump -n -r " + self.name + ".log > " + self.name + ".txt"		
-		return "sudo tcpdump -n -r " + self.name + ".log >> log.txt"
+		return "sudo tcpdump -tt -n -r " + self.name + ".log >> log.txt"
 	
 
 
@@ -226,7 +226,6 @@ def startTcpdumAllIface(net):
 			command = Command(iface)
 			hostNET = net.getNodeByName(host.label)
 			hostNET.cmd(command.start_tcpdump())
-			#time.sleep(1)
 
 
 def tests(net):
@@ -270,7 +269,7 @@ def tests(net):
 		hostNet.cmd("killall -1 tcpdump")
 		hostNet.cmd("touch log.txt")
 		hostNet.cmd("mkdir teste" + str(numTest))
-		time.sleep(1)
+		time.sleep(0.5)
 		for host in listHosts:
 			for iface in host.iface:
 				command = Command(iface)
@@ -285,7 +284,7 @@ def tests(net):
 		numTest = numTest + 1
 		path.sort()
 		info(path)
-		#result(test)
+		result(test)
 		fim = timeit.default_timer()
 		info("\nteste realizado em: " + str(fim -inicio) + '\n')
 	
@@ -333,7 +332,7 @@ def analysisLog(log,test, path):
 
 def result(test):
 	destHost = getHostDest(test)
-	f = open(destHost.name + ".txt")
+	f = open("log.txt")
 	log = f.read()
 	info(log)
 	if(test.sourceIP in log):
