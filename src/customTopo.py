@@ -252,7 +252,7 @@ def tests(net):
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
 		if(test.protocol == "udp"):
 			info("ligando sv")
-			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort)
+			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort + "&")
 			if(test.sourcePort == "*"):
 				info("ligando client")
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
