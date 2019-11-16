@@ -273,9 +273,9 @@ def tests(net):
 			for iface in host.iface:
 				command = Command(iface)
 				hostNET = net.getNodeByName(host.label)
-				hostNET.cmd('echo "iface: ' + iface.name + ' >> log.txt')
+				hostNET.cmd("echo \"iface: " + iface.name + "\n\" >> log.txt")
 				hostNET.cmd(command.convertLogTcpdump())
-				#time.sleep(1)
+				time.sleep(0.3)
 				#analysisLog(iface.name + ".txt", test, path)
 		hostNet.cmd("echo \n log.txt")
 		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
