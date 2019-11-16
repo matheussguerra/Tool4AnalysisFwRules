@@ -28,7 +28,7 @@ if(SOURCE_PORT == True):
     tcp.bind((ip_local, int(source_port)))
 
 sv = (ip, int(port))
-tcp.settimeout(5)
+tcp.settimeout(3)
 tcp.connect(sv)
 tcp.settimeout(None)
 time.sleep(1)
