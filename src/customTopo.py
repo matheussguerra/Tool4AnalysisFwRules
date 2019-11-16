@@ -253,6 +253,7 @@ def tests(net):
 		if(test.protocol == "udp"):
 			info("ligando sv")
 			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort + "&")
+			time.sleep(1)
 			if(test.sourcePort == "*"):
 				info("ligando client")
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
@@ -261,7 +262,7 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 
-		time.sleep(2)
+		time.sleep(1)
 		
 		path = []
 		aux = listHosts[0].label
