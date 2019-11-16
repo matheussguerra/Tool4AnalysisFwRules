@@ -283,7 +283,7 @@ def tests(net):
 		numTest = numTest + 1
 		path.sort()
 		info(path)
-		result(test)
+		#result(test)
 		fim = timeit.default_timer()
 		info("\nteste realizado em: " + str(fim -inicio) + '\n')
 	
