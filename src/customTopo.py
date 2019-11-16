@@ -279,7 +279,7 @@ def tests(net):
 				#analysisLog(iface.name + ".txt", test, path)
 		#hostNet.cmd("echo >>> log.txt")
 		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
-		analysisLog("log.txt", test, path)
+		#analysisLog("log.txt", test, path)
 		#hostNet.cmd("rm log.txt")
 		numTest = numTest + 1
 		path.sort()
