@@ -43,7 +43,7 @@ class Command():
 		return "ifconfig " + self.name + " " + self.ip
 
 	def start_tcpdump(self):
-		return "sudo tcpdump -tt -n -i " + self.name + " -w " + self.name + ".log not arp &"
+		return "sudo tcpdump -ttt -n -i " + self.name + " -w " + self.name + ".log not arp &"
 
 	def stop_tcpdump(self):
 		return "killall -1 tcpdump"
@@ -253,7 +253,7 @@ def tests(net):
 		if(test.protocol == "udp"):
 			info("ligando sv")
 			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort + "&")
-			time.sleep(1)
+			time.sleep(0.3)
 			if(test.sourcePort == "*"):
 				info("ligando client")
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
@@ -262,7 +262,7 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 
-		time.sleep(1)
+		time.sleep(0.5)
 		
 		path = []
 		aux = listHosts[0].label
