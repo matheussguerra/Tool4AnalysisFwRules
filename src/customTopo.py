@@ -265,7 +265,7 @@ def tests(net):
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
 		hostNet.cmd("touch log.txt")
-		hostNet.cmd("echo Teste: "  +str(numTest) + "\n >> log.txt")
+		hostNet.cmd('echo "Teste: '  +str(numTest) + '\n" >> log.txt')
 		hostNet.cmd("killall -1 tcpdump")		
 		hostNet.cmd("mkdir teste" + str(numTest))
 		time.sleep(0.5)
@@ -273,13 +273,15 @@ def tests(net):
 			for iface in host.iface:
 				command = Command(iface)
 				hostNET = net.getNodeByName(host.label)
+				hostNET.cmd('echo "iface: ' + iface.name + ' >> log.txt')
 				hostNET.cmd(command.convertLogTcpdump())
+
 				#time.sleep(1)
 				#analysisLog(iface.name + ".txt", test, path)
 		hostNet.cmd("echo \n log.txt")
 		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
 		#analysisLog("log.txt", test, path)
-		#hostNet.cmd("rm log.txt")
+		hostNet.cmd("rm log.txt")
 		numTest = numTest + 1
 		path.sort()
 		info(path)

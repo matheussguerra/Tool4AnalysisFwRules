@@ -17,7 +17,7 @@ except Exception as err1:
 
 
 tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-tcp.settimeout(1)
+tcp.settimeout(2)
 sv_address = (ip, port)
 tcp.bind(sv_address)
 tcp.listen(1)
