@@ -266,7 +266,6 @@ def tests(net):
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
 		hostNet.cmd("killall -1 tcpdump")
-		hostNet.cmd("rm log.txt")
 		hostNet.cmd("touch log.txt")
 		hostNet.cmd("mkdir teste" + str(numTest))
 		time.sleep(1)
