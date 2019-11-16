@@ -16,7 +16,7 @@ except Exception as err1:
     exit(1)
 
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-udp.settimeout(5)
+udp.settimeout(1)
 orig = (ip, port)
 udp.bind(orig)
 msg, cliente = udp.recvfrom(1024)
