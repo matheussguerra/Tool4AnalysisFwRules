@@ -17,16 +17,14 @@ except Exception as err1:
 
 
 tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-tcp.settimeout(2)
+tcp.settimeout(1)
 sv_address = (ip, port)
 tcp.bind(sv_address)
 tcp.listen(1)
 
-#print("Aguardando por conexão de clientes...")
+print("Aguardando por conexão de clientes...")
 connection, client_address = tcp.accept()
-#print ("Concetado por: " + str(client_address))
-f = open('log.txt', 'a+')
-f.write("conectado:"+str(client_address))
-f.close()
+print ("Concetado por: " + str(client_address))
+#time.sleep(1)
 connection.close()
 tcp.close()
