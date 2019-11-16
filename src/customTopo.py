@@ -248,16 +248,17 @@ def tests(net):
 		if(test.protocol == "tcp"):
 			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort)
 			if(test.sourcePort == "*"):
-				info("\n\n\npassei por aqui\n\n\n")
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
 		if(test.protocol == "udp"):
-			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort)
+			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort + "&")
 			if(test.sourcePort == "*"):
+				info("\n\n\npassei por aqui\n\n\n")
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
-				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)			#time.sleep(1)
+				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
+
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 		time.sleep(1)
