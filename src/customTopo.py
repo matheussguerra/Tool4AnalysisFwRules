@@ -245,13 +245,13 @@ def tests(net):
 			else:
 				pass
 		if(test.protocol == "tcp"):
-			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort + "&")
+			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort)
 			if(test.sourcePort == "*"):
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
 		if(test.protocol == "udp"):
-			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort + "&")
+			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort)
 			if(test.sourcePort == "*"):
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
@@ -274,7 +274,6 @@ def tests(net):
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
 				#time.sleep(1)
-				#hostNET.cmd("rm " + iface.name + ".log")
 				#analysisLog(iface.name + ".txt", test, path)
 		hostNet.cmd("echo >>> log.txt")
 		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
