@@ -272,7 +272,6 @@ def tests(net):
 				command = Command(iface)
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
-				time.sleep(0.3)
 				analysisLog(iface.name + ".txt", test, path)
 		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
 		numTest = numTest + 1
@@ -326,7 +325,7 @@ def analysisLog(log,test, path):
 
 def result(test):
 	destHost = getHostDest(test)
-	f = open("log.txt")
+	f = open(destHost.name + ".txt")
 	log = f.read()
 	info(log)
 	if(test.sourceIP in log):
