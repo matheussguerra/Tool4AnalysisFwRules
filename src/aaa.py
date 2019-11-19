@@ -13,7 +13,6 @@ import time
 import timeit
 
 def emptyNet():
-	ODL_CONTROLLER_IP='192.168.56.1'
 
 	net = Mininet(controller=Controller)
 
@@ -30,7 +29,7 @@ def emptyNet():
 	net.addHost('h3')
 	net.addHost('h4')
 
-	odl_ctrl = net.addController( 'c0', controller=RemoteController, ip=ODL_CONTROLLER_IP, port=6633)
+	ctrl = net.addController( 'c0', port=6633)
 
 
 	info('*** Creating links ***\n')
@@ -66,7 +65,8 @@ def emptyNet():
 	host.cmd('ifconfig netmask 255.255.255.0')
 	host.cmd('route add default gw 10.0.0.1')
 
-	s1.start([odl_ctrl])
+	ctrl.start()
+	s1.start([ctrl])
 
 
 	info('*** Starting CLI ***\n')
