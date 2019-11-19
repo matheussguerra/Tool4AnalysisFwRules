@@ -62,8 +62,7 @@ def emptyNet():
         host.cmd('ifconfig netmask 255.255.255.0')
         host.cmd('route add default gw 10.0.0.1')
 
-        s1.start()
-        s2.start()
+        #s1.start([])
 
 
 	info('*** Starting CLI ***\n')
