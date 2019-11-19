@@ -373,7 +373,7 @@ def emptyNet():
 		net.addHost(host.label)
 
 	ctrl.start()
-	
+
 	for switch in listSwitch:
 		sw = net.addSwitch(switch.label)
 		sw.start([ctrl])
@@ -409,7 +409,7 @@ def emptyNet():
 	tests(net)
 
 	info('*** Starting CLI ***\n')
-	#CLI(net)
+	CLI(net)
 
 	info('*** Stopping newtwork ***\n')
 	net.stop()
