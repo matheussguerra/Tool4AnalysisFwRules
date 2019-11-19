@@ -13,6 +13,7 @@ import time
 import timeit
 
 def emptyNet():
+    ODL_CONTROLLER_IP='192.168.56.1'
 	net = Mininet(controller=Controller)
 
 	info('*** Adding hosts ***\n')
