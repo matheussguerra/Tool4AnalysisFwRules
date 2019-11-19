@@ -41,10 +41,27 @@ def emptyNet():
 
 
 	info('*** Configuring hosts ***\n')
+        host = net.getNodeByName('h1')
+        host.cmd('ifconfig h1-eth0 192.168.0.2')
+        host.cmd('ifconfig netmask 255.255.255.0')
+        host.cmd('route add default gw 192.168.0.1')
+
+        host = net.getNodeByName('h2')
+        host.cmd('ifconfig h1-eth0 192.168.0.3')
+        host.cmd('ifconfig netmask 255.255.255.0')
+        host.cmd('route add default gw 192.168.0.1')
 
 
-	info('*** Init tests ***\n')
-	tests(net)
+        host = net.getNodeByName('h3')
+        host.cmd('ifconfig h1-eth0 10.0.0.2')
+        host.cmd('ifconfig netmask 255.255.255.0')
+        host.cmd('route add default gw 10.0.0.1')
+
+        host = net.getNodeByName('h4')
+        host.cmd('ifconfig h1-eth0 10.0.0.3')
+        host.cmd('ifconfig netmask 255.255.255.0')
+        host.cmd('route add default gw 10.0.0.1')
+
 
 	info('*** Starting CLI ***\n')
 	CLI(net)
