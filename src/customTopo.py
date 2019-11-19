@@ -279,7 +279,7 @@ def tests(net):
 		info(path)
 		result(test)
 		fim = timeit.default_timer()
-		hostNet.cmd("rm *.log")
+		hostNet.cmd("rm *.txt")
 		info("\nteste realizado em: " + str(fim -inicio) + '\n')
 	
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
@@ -387,7 +387,7 @@ def emptyNet():
 	tests(net)
 
 	info('*** Starting CLI ***\n')
-	CLI(net)
+	#CLI(net)
 
 	info('*** Stopping newtwork ***\n')
 	net.stop()
