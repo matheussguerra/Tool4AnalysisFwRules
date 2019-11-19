@@ -55,6 +55,7 @@ def emptyNet():
 	host.cmd('route add default gw 192.168.0.1')
 
 	router = net.getNodeByName('r1')
+	router.cmd('echo 1 > /proc/sys/net/ipv4/ip_forward')
 	router.cmd('ifconfig r1-eth0 192.168.0.1')
 	router.cmd('ifconfig r1-eth0 netmask 255.255.255.0')
 	router.cmd('route add default gw 0.0.0.0')
