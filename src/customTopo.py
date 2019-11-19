@@ -153,7 +153,10 @@ class Tests:
 
 
 def readJsonFile():
-	with open('jsonTest.json') as f:
+	#with open('jsonTest.json') as f:
+		#data = json.load(f)
+
+	with open('teste.json') as f:
 		data = json.load(f)
 	
 	return data
