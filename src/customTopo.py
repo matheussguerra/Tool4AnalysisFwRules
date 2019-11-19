@@ -232,7 +232,7 @@ def tests(net):
 	numTest = 1
 	for test in listTests:
 		inicio = timeit.default_timer()
-		#info("\nIniciando Tcpdump...\n")
+		info("\nIniciando Tcpdump...\n")
 		startTcpdumAllIface(net)
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
@@ -273,13 +273,13 @@ def tests(net):
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
 				analysisLog(iface.name + ".txt", test, path)
-		hostNet.cmd("sudo mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
+		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
 		numTest = numTest + 1
 		path.sort()
 		info(path)
 		result(test)
-		#hostNet.cmd("rm *.txt")
 		fim = timeit.default_timer()
+		hostNet.cmd("rm *.log")
 		info("\nteste realizado em: " + str(fim -inicio) + '\n')
 	
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
