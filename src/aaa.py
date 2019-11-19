@@ -19,7 +19,7 @@ def emptyNet():
         net.addHost('h1')
         net.addHost('h2')
 
-        s1 = net.addSwitch('s1')
+        s1 = net.addSwitch('s1', listenPort=6634)
 
         net.addHost('r1')
 
