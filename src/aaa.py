@@ -61,7 +61,7 @@ def emptyNet():
 	router.cmd('route add default gw 0.0.0.0')
 	router.cmd('ifconfig r1-eth1 10.0.0.1')
 	router.cmd('ifconfig r1-eth1 netmask 255.255.255.0')
-	router.cmd('ifconfig ')
+	router.cmd('')
 
 
 	host = net.getNodeByName('h3')
@@ -86,10 +86,5 @@ def emptyNet():
 	exit()
 
 
-
-
 setLogLevel('info')
 emptyNet()
-
-
-## Não estamos pensando em executar serviços de rede, tal como ftp

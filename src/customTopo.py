@@ -16,7 +16,7 @@ import timeit
 listHosts = []		# Lista de hosts (node)
 listLink = []		# Lista de arestas (link entre hosts)
 listTests = [] 		# Lista de testes a ser realizado
-
+listSwitch = []
 
 class Command():
 	"""
@@ -91,6 +91,13 @@ class Host():
 	def set_fwCommand(self, commands):
 		self.fwCommand = commands
 
+
+class Switch():
+	def __init__(self, label):
+		self.label = label
+
+	def __str__(self):
+		return "\nName: " + self.label
 
 
 class Interface():
@@ -193,7 +200,13 @@ def createIface(ifaces, label):
 
 	return attrIface
 	
-	
+def createSwitch(data):
+	for i in range(0, len(data)):
+		label = data[i]["label"]
+
+		listSwitch.append(Switch(label))
+
+
 
 def createLinks(data):
 	for i in range(0, len(data)):
@@ -205,6 +218,7 @@ def createLinks(data):
 
 def createObjects(data):
 	createHosts(data["hosts"])
+	createSwitch(data["switchs"])
 	createLinks(data["links"])
 	
 
@@ -352,10 +366,18 @@ def getHostDest(test):
 
 def emptyNet():
 	net = Mininet(controller=Controller)
+	ctrl = net.addController( 'c0', port=6633)
 
 	info('*** Adding hosts ***\n')
 	for host in listHosts:
 		net.addHost(host.label)
+
+	ctrl.start()
+	
+	for switch in listSwitch:
+		sw = net.addSwitch(switch.label)
+		sw.start([ctrl])
+		
 
 	info('*** Creating links ***\n')
 	for link in listLink:
