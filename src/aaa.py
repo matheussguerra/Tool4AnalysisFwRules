@@ -57,8 +57,10 @@ def emptyNet():
 	router = net.getNodeByName('r1')
 	router.cmd('ifconfig r1-eth0 192.168.0.1')
 	router.cmd('ifconfig r1-eth0 netmask 255.255.255.0')
+	router.cmd('route add default gw 0.0.0.0')
 	router.cmd('ifconfig r1-eth1 10.0.0.1')
 	router.cmd('ifconfig r1-eth1 netmask 255.255.255.0')
+	router.cmd('ifconfig ')
 
 
 	host = net.getNodeByName('h3')
