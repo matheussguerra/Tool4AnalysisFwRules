@@ -418,8 +418,10 @@ createObjects(data["scene"])
 createTests(data["test"])
 
 setLogLevel('info')
-emptyNet()
 fim = timeit.default_timer()
-
 print("hosts criados e configurados em: " + str(fim-inicio))
+emptyNet()
+
+
+
 
