@@ -1,3 +1,0 @@
-09:51:42.026890 IP 192.168.0.2.51292 > 10.0.0.2.80: Flags [S], seq 3122340835, win 29200, options [mss 1460,sackOK,TS val 115589 ecr 0,nop,wscale 9], length 0
-09:51:43.024912 IP 192.168.0.2.51292 > 10.0.0.2.80: Flags [S], seq 3122340835, win 29200, options [mss 1460,sackOK,TS val 115839 ecr 0,nop,wscale 9], length 0
-09:51:45.028961 IP 192.168.0.2.51292 > 10.0.0.2.80: Flags [S], seq 3122340835, win 29200, options [mss 1460,sackOK,TS val 116340 ecr 0,nop,wscale 9], length 0

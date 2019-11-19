@@ -232,7 +232,7 @@ def tests(net):
 	numTest = 1
 	for test in listTests:
 		inicio = timeit.default_timer()
-		info("\nIniciando Tcpdump...\n")
+		#info("\nIniciando Tcpdump...\n")
 		startTcpdumAllIface(net)
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
@@ -274,6 +274,7 @@ def tests(net):
 				hostNET.cmd(command.convertLogTcpdump())
 				analysisLog(iface.name + ".txt", test, path)
 		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
+		hostNet.cmd("rm *.txt")
 		numTest = numTest + 1
 		path.sort()
 		info(path)
