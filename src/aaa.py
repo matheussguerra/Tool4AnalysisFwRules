@@ -67,7 +67,7 @@ def emptyNet():
 
 	ctrl.start()
 	s1.start([ctrl])
-
+	s2.start([ctrl])
 
 	info('*** Starting CLI ***\n')
 	CLI(net)
