@@ -403,7 +403,8 @@ def emptyNet():
 
 	info('*** Init tests ***\n')
 	tests(net)
-
+    fim = timeit.default_timer()
+    info("hosts criados e configurados em: " + str(fim-inicio))
 	info('*** Starting CLI ***\n')
 	#CLI(net)
 
@@ -411,16 +412,16 @@ def emptyNet():
 	net.stop()
 	exit()
 
-if __name__ == "__main__":
-    inicio = timeit.default_timer()
-    data = readJsonFile()
-    createObjects(data["scene"])
-    createTests(data["test"])
 
-    setLogLevel('info') 
-    emptyNet()
-    fim = timeit.default_timer()
-    print("hosts criados e configurados em: " + str(fim-inicio))
+inicio = timeit.default_timer()
+data = readJsonFile()
+createObjects(data["scene"])
+createTests(data["test"])
+
+setLogLevel('info') 
+emptyNet(inicio)
+
+
 
 
 
