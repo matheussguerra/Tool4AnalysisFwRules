@@ -30,10 +30,10 @@ def emptyNet():
 
 
 	info('*** Creating links ***\n')
-        net.addLink('h1',s1)
-        net.addLink('h2',s1)
+        net.addLink('h1','s1')
+        net.addLink('h2','s1')
 
-        net.addLink(s1, 'r1')        
+        net.addLink('s1', 'r1')        
         net.addLink('r1', 's2')
 
         net.addLink('h3','s2')
@@ -61,6 +61,9 @@ def emptyNet():
         host.cmd('ifconfig h4-eth0 10.0.0.3')
         host.cmd('ifconfig netmask 255.255.255.0')
         host.cmd('route add default gw 10.0.0.1')
+
+        s1.start()
+        s2.start()
 
 
 	info('*** Starting CLI ***\n')
