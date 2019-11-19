@@ -28,6 +28,8 @@ def emptyNet():
         net.addHost('h3')
         net.addHost('h4')
 
+        odl_ctrl = net.addController( 'c0', controller=RemoteController, ip=ODL_CONTROLLER_IP, port=6633)
+
 
 	info('*** Creating links ***\n')
         net.addLink('h1','s1')
@@ -62,7 +64,7 @@ def emptyNet():
         host.cmd('ifconfig netmask 255.255.255.0')
         host.cmd('route add default gw 10.0.0.1')
 
-        #s1.start([])
+        s1.start([odl_ctrl])
 
 
 	info('*** Starting CLI ***\n')
