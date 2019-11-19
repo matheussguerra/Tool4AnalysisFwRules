@@ -156,24 +156,24 @@ def readJsonFile():
 	with open('teste_carga/teste_10.json') as f:
 		data = json.load(f)
  
-    #with open('teste_carga/teste_50.json') as f:
+	#with open('teste_carga/teste_50.json') as f:
 		#data = json.load(f)
 
-    #with open('teste_carga/teste_100.json') as f:
+	#with open('teste_carga/teste_100.json') as f:
 		#data = json.load(f)
 
-    #with open('teste_carga/teste_500.json') as f:
+	#with open('teste_carga/teste_500.json') as f:
 		#data = json.load(f)
 
-    #with open('teste_carga/teste_1000.json') as f:
+	#with open('teste_carga/teste_1000.json') as f:
 		#data = json.load(f)
 
-    #with open('teste_carga/teste_5000.json') as f:
+	#with open('teste_carga/teste_5000.json') as f:
 		#data = json.load(f)
  
-    #with open('teste_carga/teste_10000.json') as f:
+	#with open('teste_carga/teste_10000.json') as f:
 		#data = json.load(f) 
-        
+		
 	return data
 
 
@@ -368,7 +368,7 @@ def getHostDest(test):
 			if(interface.ip == test.destinationIP):
 				return(interface)
 
-def emptyNet():
+def emptyNet(inicio):
 	net = Mininet(controller=Controller)
 
 	info('*** Adding hosts ***\n')
@@ -403,8 +403,8 @@ def emptyNet():
 
 	info('*** Init tests ***\n')
 	tests(net)
-    fim = timeit.default_timer()
-    info("hosts criados e configurados em: " + str(fim-inicio))
+	fim = timeit.default_timer()
+	info("hosts criados e configurados em: " + str(fim-inicio))
 	info('*** Starting CLI ***\n')
 	#CLI(net)
 
