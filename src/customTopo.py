@@ -279,6 +279,7 @@ def tests(net):
 		info(path)
 		result(test)
 		fim = timeit.default_timer()
+		hostNet.cmd("rm *.log")
 		info("\nteste realizado em: " + str(fim -inicio) + '\n')
 	
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
