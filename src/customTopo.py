@@ -408,12 +408,12 @@ def emptyNet():
 	info('*** Init tests ***\n')
 	tests(net)
 
-	info('*** Starting CLI ***\n')
+	#info('*** Starting CLI ***\n')
 	CLI(net)
 
 	info('*** Stopping newtwork ***\n')
-	ctrl.stop()
 	net.stop()
+	time.sleep(3)
 	exit()
 
 
