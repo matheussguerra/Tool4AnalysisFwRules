@@ -375,7 +375,7 @@ def emptyNet():
 	ctrl.start()
 
 	for switch in listSwitch:
-		sw = net.addSwitch(switch.label)
+		sw = net.addSwitch(str(switch.label))
 		sw.start([ctrl])
 		
 
@@ -413,7 +413,6 @@ def emptyNet():
 
 	info('*** Stopping newtwork ***\n')
 	net.stop()
-	time.sleep(3)
 	exit()
 
 
