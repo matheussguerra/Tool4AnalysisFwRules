@@ -30,14 +30,14 @@ def emptyNet():
 
 
 	info('*** Creating links ***\n')
-        net.AddLink('h1','s1')
-        net.AddLink('h2','s1')
+        net.addLink('h1','s1')
+        net.addLink('h2','s1')
 
-        net.AddLink('s1', 'r1')        
-        net.AddLink('r1', 's2')
+        net.addLink('s1', 'r1')        
+        net.addLink('r1', 's2')
 
-        net.AddLink('h3','s2')
-        net.AddLink('h4','s2')
+        net.addLink('h3','s2')
+        net.addLink('h4','s2')
 
 
 	info('*** Configuring hosts ***\n')
