@@ -19,21 +19,21 @@ def emptyNet():
         net.addHost('h1')
         net.addHost('h2')
 
-        net.addSwitch('s1')
+        s1 = net.addSwitch('s1')
 
         net.addHost('r1')
 
-        net.addSwitch('s2')
+        s2 = net.addSwitch('s2')
 
         net.addHost('h3')
         net.addHost('h4')
 
 
 	info('*** Creating links ***\n')
-        net.addLink('h1','s1')
-        net.addLink('h2','s1')
+        net.addLink('h1',s1)
+        net.addLink('h2',s1)
 
-        net.addLink('s1', 'r1')        
+        net.addLink(s1, 'r1')        
         net.addLink('r1', 's2')
 
         net.addLink('h3','s2')
