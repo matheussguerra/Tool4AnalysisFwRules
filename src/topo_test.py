@@ -404,7 +404,7 @@ def emptyNet(inicio):
 	info('*** Init tests ***\n')
 	tests(net)
 	fim = timeit.default_timer()
-	info("hosts criados e configurados em: " + str(fim-inicio))
+	info("hosts criados e configurados em: " + str(fim-inicio) + '\n')
 	info('*** Starting CLI ***\n')
 	#CLI(net)
 
