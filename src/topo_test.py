@@ -369,6 +369,7 @@ def getHostDest(test):
 				return(interface)
 
 def emptyNet():
+    inicio = timeit.default_timer()
 	net = Mininet(controller=Controller)
 
 	info('*** Adding hosts ***\n')
@@ -408,18 +409,20 @@ def emptyNet():
 	#CLI(net)
 
 	info('*** Stopping newtwork ***\n')
+    fim = timeit.default_timer()
+    info("hosts criados e configurados em: " + str(fim-inicio) + '\n')
 	net.stop()
 	exit()
 
 
-inicio = timeit.default_timer()
+
 data = readJsonFile()
 createObjects(data["scene"])
 createTests(data["test"])
 
 setLogLevel('info')
 emptyNet()
-fim = timeit.default_timer()
 
-print("hosts criados e configurados em: " + str(fim-inicio))
+
+
 
