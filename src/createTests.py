@@ -1,7 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8
+
 import json
 import random
+import sys
+import os
 
 
 def typeSelector():
@@ -85,7 +88,7 @@ def generateHost(times):
 
 
 def main():
-    qtdHosts = 10
+    qtdHosts = int(sys.argv[1])
     x = {
         "scene": {
             "hosts": None,
@@ -98,8 +101,12 @@ def main():
     x["scene"]["links"] = []
     x["test"] = []
 
-
-    with open('teste.json', 'w') as outfile:
+    if(os.path.isdir('./teste_carga')):
+        pass
+    else:
+        os.mkdir('teste_carga')
+        
+    with open('teste_carga/teste_' + str(qtdHosts) +'.json', 'w') as outfile:
         json.dump(x, outfile)
 
 if __name__ == "__main__":

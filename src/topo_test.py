@@ -153,9 +153,27 @@ class Tests:
 
 
 def readJsonFile():
-	with open('jsonTest.json') as f:
+	with open('teste_carga/teste_10.json') as f:
 		data = json.load(f)
-	
+ 
+    #with open('teste_carga/teste_50.json') as f:
+		#data = json.load(f)
+
+    #with open('teste_carga/teste_100.json') as f:
+		#data = json.load(f)
+
+    #with open('teste_carga/teste_500.json') as f:
+		#data = json.load(f)
+
+    #with open('teste_carga/teste_1000.json') as f:
+		#data = json.load(f)
+
+    #with open('teste_carga/teste_5000.json') as f:
+		#data = json.load(f)
+ 
+    #with open('teste_carga/teste_10000.json') as f:
+		#data = json.load(f)
+        
 	return data
 
 
@@ -394,12 +412,14 @@ def emptyNet():
 	exit()
 
 
+inicio = timeit.default_timer()
 data = readJsonFile()
 createObjects(data["scene"])
 createTests(data["test"])
 
 setLogLevel('info')
 emptyNet()
+fim = timeit.default_timer()
 
+print("hosts criados e configurados em: " + str(fim-inicio))
 
-## Não estamos pensando em executar serviços de rede, tal como ftp
