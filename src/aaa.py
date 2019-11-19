@@ -47,18 +47,18 @@ def emptyNet():
         host.cmd('route add default gw 192.168.0.1')
 
         host = net.getNodeByName('h2')
-        host.cmd('ifconfig h1-eth0 192.168.0.3')
+        host.cmd('ifconfig h2-eth0 192.168.0.3')
         host.cmd('ifconfig netmask 255.255.255.0')
         host.cmd('route add default gw 192.168.0.1')
 
 
         host = net.getNodeByName('h3')
-        host.cmd('ifconfig h1-eth0 10.0.0.2')
+        host.cmd('ifconfig h3-eth0 10.0.0.2')
         host.cmd('ifconfig netmask 255.255.255.0')
         host.cmd('route add default gw 10.0.0.1')
 
         host = net.getNodeByName('h4')
-        host.cmd('ifconfig h1-eth0 10.0.0.3')
+        host.cmd('ifconfig h4-eth0 10.0.0.3')
         host.cmd('ifconfig netmask 255.255.255.0')
         host.cmd('route add default gw 10.0.0.1')
 
