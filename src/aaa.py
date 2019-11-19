@@ -13,59 +13,60 @@ import time
 import timeit
 
 def emptyNet():
-    ODL_CONTROLLER_IP='192.168.56.1'
+	ODL_CONTROLLER_IP='192.168.56.1'
+
 	net = Mininet(controller=Controller)
 
 	info('*** Adding hosts ***\n')
-        net.addHost('h1')
-        net.addHost('h2')
+	net.addHost('h1')
+	net.addHost('h2')
 
-        s1 = net.addSwitch('s1', listenPort=6634)
+	s1 = net.addSwitch('s1', listenPort=6634)
 
-        net.addHost('r1')
+	net.addHost('r1')
 
-        s2 = net.addSwitch('s2')
+	s2 = net.addSwitch('s2')
 
-        net.addHost('h3')
-        net.addHost('h4')
+	net.addHost('h3')
+	net.addHost('h4')
 
-        odl_ctrl = net.addController( 'c0', controller=RemoteController, ip=ODL_CONTROLLER_IP, port=6633)
+	odl_ctrl = net.addController( 'c0', controller=RemoteController, ip=ODL_CONTROLLER_IP, port=6633)
 
 
 	info('*** Creating links ***\n')
-        net.addLink('h1','s1')
-        net.addLink('h2','s1')
+	net.addLink('h1','s1')
+	net.addLink('h2','s1')
 
-        net.addLink('s1', 'r1')        
-        net.addLink('r1', 's2')
+	net.addLink('s1', 'r1')        
+	net.addLink('r1', 's2')
 
-        net.addLink('h3','s2')
-        net.addLink('h4','s2')
+	net.addLink('h3','s2')
+	net.addLink('h4','s2')
 
 
 	info('*** Configuring hosts ***\n')
-        host = net.getNodeByName('h1')
-        host.cmd('ifconfig h1-eth0 192.168.0.2')
-        host.cmd('ifconfig netmask 255.255.255.0')
-        host.cmd('route add default gw 192.168.0.1')
+	host = net.getNodeByName('h1')
+	host.cmd('ifconfig h1-eth0 192.168.0.2')
+	host.cmd('ifconfig netmask 255.255.255.0')
+	host.cmd('route add default gw 192.168.0.1')
 
-        host = net.getNodeByName('h2')
-        host.cmd('ifconfig h2-eth0 192.168.0.3')
-        host.cmd('ifconfig netmask 255.255.255.0')
-        host.cmd('route add default gw 192.168.0.1')
+	host = net.getNodeByName('h2')
+	host.cmd('ifconfig h2-eth0 192.168.0.3')
+	host.cmd('ifconfig netmask 255.255.255.0')
+	host.cmd('route add default gw 192.168.0.1')
 
 
-        host = net.getNodeByName('h3')
-        host.cmd('ifconfig h3-eth0 10.0.0.2')
-        host.cmd('ifconfig netmask 255.255.255.0')
-        host.cmd('route add default gw 10.0.0.1')
+	host = net.getNodeByName('h3')
+	host.cmd('ifconfig h3-eth0 10.0.0.2')
+	host.cmd('ifconfig netmask 255.255.255.0')
+	host.cmd('route add default gw 10.0.0.1')
 
-        host = net.getNodeByName('h4')
-        host.cmd('ifconfig h4-eth0 10.0.0.3')
-        host.cmd('ifconfig netmask 255.255.255.0')
-        host.cmd('route add default gw 10.0.0.1')
+	host = net.getNodeByName('h4')
+	host.cmd('ifconfig h4-eth0 10.0.0.3')
+	host.cmd('ifconfig netmask 255.255.255.0')
+	host.cmd('route add default gw 10.0.0.1')
 
-        s1.start([odl_ctrl])
+	s1.start([odl_ctrl])
 
 
 	info('*** Starting CLI ***\n')
