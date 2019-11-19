@@ -41,17 +41,23 @@
 			}
 		],
 	
-	"links":[{
-		"label" : "h1-r1",
-		"to" : "h1",
-		"from" : "r1"
+		"links":[{
+				"label" : "h1-r1",
+				"to" : "h1",
+				"from" : "r1"
+			},
+			{
+				"label" : "r1-h2",
+				"to" : "r1",
+				"from" : "h2"
+			}
+			],
+
+		"switchs":[{
+				"label":"s1"
+			}
+			]
 		},
-		{
-		"label" : "r1-h2",
-		"to" : "r1",
-		"from" : "h2"}
-		]
-	},
 
 
 	"test":[{
