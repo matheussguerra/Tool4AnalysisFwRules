@@ -30,10 +30,10 @@ def emptyNet():
 
 
 	info('*** Creating links ***\n')
-        net.addLink('h1','s1')
-        net.addLink('h2','s1')
+        net.addLink('h1','s1-eth2')
+        net.addLink('h2','s1-eth3')
 
-        net.addLink('s1', 'r1')        
+        net.addLink('s1-eth1', 'r1')        
         net.addLink('r1', 's2')
 
         net.addLink('h3','s2')
