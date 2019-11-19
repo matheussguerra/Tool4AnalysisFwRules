@@ -20,7 +20,7 @@ def emptyNet():
 	net.addHost('h1')
 	net.addHost('h2')
 
-	s1 = net.addSwitch('s1', listenPort=6634)
+	s1 = net.addSwitch('s1')
 
 	net.addHost('r1')
 
@@ -53,6 +53,12 @@ def emptyNet():
 	host.cmd('ifconfig h2-eth0 192.168.0.3')
 	host.cmd('ifconfig netmask 255.255.255.0')
 	host.cmd('route add default gw 192.168.0.1')
+
+	router = net.getNodeByName('r1')
+	router.cmd('ifconfig r1-eth0 192.168.0.1')
+	router.cmd('ifconfig r1-eth0 netmask 255.255.255.0')
+	router.cmd('ifconfig r1-eth1 10.0.0.1')
+	router.cmd('ifconfig r1-eth1 netmask 255.255.255.0')
 
 
 	host = net.getNodeByName('h3')
