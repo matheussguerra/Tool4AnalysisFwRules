@@ -412,6 +412,7 @@ def emptyNet():
 	CLI(net)
 
 	info('*** Stopping newtwork ***\n')
+	ctrl.stop()
 	net.stop()
 	exit()
 
