@@ -71,7 +71,6 @@ def generateHost(times):
         fwRules = ""
 
         numIface = random.randint(1, 4)
-        print (numIface)
         iface = generateIface(numIface)
 
         host["type"] = typeNode
@@ -90,13 +89,13 @@ def main():
     x = {
         "scene": {
             "hosts": None,
-            "link": None
+            "links": None
         },
         "test": None
     }
 
     x["scene"]["hosts"] = generateHost(qtdHosts)
-    x["scene"]["link"] = []
+    x["scene"]["links"] = []
     x["test"] = []
 
 
