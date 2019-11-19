@@ -409,7 +409,7 @@ def emptyNet():
 
 	info('*** Stopping newtwork ***\n')
 	net.stop()
-	#exit()
+	exit()
 
 
 inicio = timeit.default_timer()
