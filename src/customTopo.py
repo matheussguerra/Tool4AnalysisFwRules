@@ -274,11 +274,11 @@ def tests(net):
 				hostNET.cmd(command.convertLogTcpdump())
 				analysisLog(iface.name + ".txt", test, path)
 		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
-		hostNet.cmd("rm *.txt")
 		numTest = numTest + 1
 		path.sort()
 		info(path)
 		result(test)
+		hostNet.cmd("rm *.txt")
 		fim = timeit.default_timer()
 		info("\nteste realizado em: " + str(fim -inicio) + '\n')
 	
