@@ -277,14 +277,15 @@ def tests(net):
 		path = []
 		aux = listHosts[0].label
 		hostNet = net.getNodeByName(aux)
-		hostNet.cmd("killall -1 tcpdump")		
+		hostNet.cmd("killall -1 tcpdump")
+		time.sleep(1)		
 		hostNet.cmd("mkdir teste" + str(numTest))
-		time.sleep(0.5)
 		for host in listHosts:
 			for iface in host.iface:
 				command = Command(iface)
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
+				time.sleep(0.2)
 				analysisLog(iface.name + ".txt", test, path)		
 		path.sort()
 		info(path)
