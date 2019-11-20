@@ -384,7 +384,7 @@ def result(test):
 	
 	for line in lines:
 		if("Flags" in line):
-			info(handshake + " > dentro do laço\n")
+			info(str(handshake) + " > dentro do laço\n")
 			processedLine = processTcpdumpLine(line)
 			if(aux ==  0 and test.sourceIP == processedLine[1] and test.destinationIP == processedLine[2]):
 				if(processedLine[3] == "[S]"):				
@@ -410,7 +410,7 @@ def result(test):
 			if(test.sourceIP == processedLine[1]):
 				datagram = True
 				break
-	info(handshake + " > fora do laço\n")
+	info(str(handshake) + " > fora do laço\n")
 	if(test.protocol == "tcp"):
 		if(test.expected == "accept"):
 			if(handshake == True):
