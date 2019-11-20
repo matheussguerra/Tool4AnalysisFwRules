@@ -132,7 +132,39 @@
 		"sPort" : "*",
 		"dPort" : "22",
 		"expected" : "deny"
-	}
+    },
+	{
+		"sourceIP": "192.168.0.2",
+		"destIP" : "10.0.0.2",
+		"protocol" : "tcp",
+		"sPort" : "*",
+		"dPort" : "80",
+		"expected" : "accept"
+    },
+	{
+		"sourceIP": "192.168.0.3",
+		"destIP" : "10.0.0.2",
+		"protocol" : "tcp",
+		"sPort" : "*",
+		"dPort" : "443",
+		"expected" : "accept"
+    },
+    {
+        "sourceIP": "192.168.0.2",
+        "destIP" : "10.0.0.3",
+        "protocol" : "tcp",
+        "sPort" : "*",
+        "dPort" : "22",
+        "expected" : "accept"
+    },
+    {
+        "sourceIP": "192.168.0.3",
+        "destIP" : "10.0.0.3",
+        "protocol" : "udp",
+        "sPort" : "*",
+        "dPort" : "53",
+        "expected" : "accept"
+    }
 ]
 
 
