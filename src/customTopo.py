@@ -17,6 +17,7 @@ listHosts = []		# Lista de hosts (node)
 listLink = []		# Lista de arestas (link entre hosts)
 listTests = [] 		# Lista de testes a ser realizado
 listSwitch = []
+swAux = []
 
 class Command():
 	"""
@@ -372,11 +373,10 @@ def emptyNet():
 	for host in listHosts:
 		net.addHost(host.label)
 
-	ctrl.start()
 
 	for switch in listSwitch:
 		sw = net.addSwitch(str(switch.label))
-		sw.start([ctrl])
+		swAux.append(sw)
 		
 
 	info('*** Creating links ***\n')
@@ -404,6 +404,11 @@ def emptyNet():
 
 		if host.type == 'router':
 			hostNET.cmd(cmd.configRouter())
+
+		ctrl.start()
+
+		for switch in swAux:
+			switch.start([ctrl])
 
 	info('*** Init tests ***\n')
 	tests(net)
