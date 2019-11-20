@@ -270,7 +270,6 @@ def tests(net):
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
 			for iface in host.iface:
-			#dar um jeito de iterar em todas as interfaces (estático no momento)
 				if test.destinationIP in iface.ip:
 					hostDestLabel = net.getNodeByName(host.label)
 				if test.sourceIP in iface.ip:
@@ -325,8 +324,6 @@ def tests(net):
 		hostNet.cmd("sudo rm *.txt")
 		info("\nteste realizado em: " + str(fim -inicio) + '\n')
 		numTest = numTest + 1
-	
-#"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
 def analysisLog(iface, test, path):
 	f = open(iface + ".txt", 'r')
@@ -426,6 +423,7 @@ def result(test):
 				info("\nTeste REPROVADO - os pacotes chegaram ao destino")			
 			else:
 				info("\nTeste APROVADO - os pacotes não chegaram ao destino")
+		handshake = 0
 					
 	elif(test.protocol == "ICMP"):
 		pass
