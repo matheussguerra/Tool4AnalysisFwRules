@@ -288,7 +288,6 @@ def tests(net):
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
 				analysisLog(iface.name + ".txt", test, path)
-		time.sleep(0.5)
 		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
 		numTest = numTest + 1
 		path.sort()
@@ -418,8 +417,8 @@ def emptyNet():
 	CLI(net)
 
 	#info('*** Stopping newtwork ***\n')
-	net.stop()
 	ctrl.stop()
+	net.stop()
 	exit()
 
 
