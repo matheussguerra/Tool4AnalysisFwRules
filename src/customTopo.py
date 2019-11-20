@@ -160,7 +160,7 @@ class Tests:
 
 
 def readJsonFile():
-	with open('jsonTest.json') as f:
+	with open('2redes.json') as f:
 		data = json.load(f)
 	
 	return data
@@ -409,9 +409,9 @@ def emptyNet():
 	tests(net)
 
 	#info('*** Starting CLI ***\n')
-	CLI(net)
+	#CLI(net)
 
-	info('*** Stopping newtwork ***\n')
+	#info('*** Stopping newtwork ***\n')
 	net.stop()
 	exit()
 
