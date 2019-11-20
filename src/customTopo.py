@@ -273,6 +273,7 @@ def tests(net):
 				pass
 		if(test.protocol == "tcp"):
 			th1 = Thread(target=tcpServer, args=[hostDestLabel, test.destinationIP, test.destinationPort])
+			time.sleep(0.5)
 			th1.start()
 			if(test.sourcePort == "*"):
 				th2 = Thread(target=tcpClient, args=[hostSourceLabel, test.destinationIP, test.destinationPort])
