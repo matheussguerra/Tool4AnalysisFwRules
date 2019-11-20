@@ -269,13 +269,14 @@ def tests(net):
 		startTcpdumAllIface(net)
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
+			for iface in host.iface:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
-			if test.destinationIP in host.iface[0].ip:
-				hostDestLabel = net.getNodeByName(host.label)
-			if test.sourceIP in host.iface[0].ip:
-				hostSourceLabel = net.getNodeByName(host.label)
-			else:
-				pass
+				if test.destinationIP in iface.ip:
+					hostDestLabel = net.getNodeByName(host.label)
+				if test.sourceIP in iface.ip:
+					hostSourceLabel = net.getNodeByName(host.label)
+				else:
+					pass
 		if(test.protocol == "tcp"):
 			th1 = Thread(target=tcpServer, args=[hostDestLabel, test.destinationIP, test.destinationPort])			
 			th1.start()
