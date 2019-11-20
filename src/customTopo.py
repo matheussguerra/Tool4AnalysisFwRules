@@ -285,14 +285,14 @@ def tests(net):
 				command = Command(iface)
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
-				analysisLog(iface.name + ".txt", test, path)
-		hostNet.cmd("mv *.log /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
+				analysisLog(iface.name + ".txt", test, path)		
 		numTest = numTest + 1
 		path.sort()
 		info(path)
 		result(test)
 		fim = timeit.default_timer()
-		hostNet.cmd("rm *.txt")
+		hostNet.cmd("mv *.txt /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
+		hostNet.cmd("rm *.log")
 		info("\nteste realizado em: " + str(fim -inicio) + '\n')
 	
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
