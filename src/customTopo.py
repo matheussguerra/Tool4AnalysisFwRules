@@ -366,6 +366,7 @@ def getHostDest(test):
 def emptyNet():
 	net = Mininet(controller=Controller, switch=OVSSwitch)
 	ctrl = net.addController('c1')
+	ctrl.start()
 
 	info('*** Adding hosts ***\n')
 	for host in listHosts:
@@ -403,7 +404,7 @@ def emptyNet():
 		if host.type == 'router':
 			hostNET.cmd(cmd.configRouter())
 
-		ctrl.start()
+		
 
 		for switch in swAux:
 			switch.start([ctrl])
