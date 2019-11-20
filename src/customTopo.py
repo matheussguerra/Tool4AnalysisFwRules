@@ -419,7 +419,6 @@ def result(test):
 
 		if(test.expected == "deny"):
 			if(handshake != True):
-				info(str(test.expected) + ' ' + str(handshake) + "\n")
 				info("\nTeste REPROVADO - os pacotes chegaram ao destino")			
 			else:
 				info("\nTeste APROVADO - os pacotes não chegaram ao destino")

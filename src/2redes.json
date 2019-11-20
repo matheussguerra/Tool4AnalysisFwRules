@@ -43,7 +43,7 @@
                         "gw" : "0.0.0.0"
                     }
                 ],
-                "fwCommand":["iptables -A INPUT -s 10.0.0.0/24 -p udp -j REJECT","iptables -A INPUT -s 10.0.0.0/24 -p tcp -m state --state NEW -j REJECT","iptables -A FORWARD -d 192.168.0.0/24 -p tcp --dport 22 -m state --state NEW -j REJECT","iptables -A FORWARD -d 192.168.0.0/24 -p tcp --dport 80 -m state --state NEW -j REJECT"]
+                "fwCommand":["iptables -A OUTPUT -d 192.168.0.0/24 -p tcp -m state --state NEW -j REJECT","iptables -A OUTPUT -d 192.168.0.0/24 -p tcp -m state --state NEW -j REJECT","iptables -A INPUT -s 10.0.0.0/24 -p udp -j REJECT","iptables -A INPUT -s 10.0.0.0/24 -p tcp -m state --state NEW -j REJECT","iptables -A FORWARD -d 192.168.0.0/24 -p tcp --dport 22 -m state --state NEW -j REJECT","iptables -A FORWARD -d 192.168.0.0/24 -p tcp --dport 80 -m state --state NEW -j REJECT"]
             },
 
             {			
@@ -176,6 +176,22 @@
     {
         "sourceIP": "10.0.0.3",
         "destIP" : "10.0.0.1",
+        "protocol" : "tcp",
+        "sPort" : "*",
+        "dPort" : "22",
+        "expected" : "deny"
+    },
+    {
+        "sourceIP": "10.0.0.1",
+        "destIP" : "10.0.0.3",
+        "protocol" : "tcp",
+        "sPort" : "*",
+        "dPort" : "80",
+        "expected" : "accept"
+    },
+    {
+        "sourceIP": "192.168.0.1",
+        "destIP" : "192.168.0.2",
         "protocol" : "tcp",
         "sPort" : "*",
         "dPort" : "22",
