@@ -253,8 +253,10 @@ def tests(net):
 		for host in listHosts:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
 			if test.destinationIP in host.iface[0].ip:
+				info(host.label +  " achei o host destino\n")
 				hostDestLabel = net.getNodeByName(host.label)
 			if test.sourceIP in host.iface[0].ip:
+				info(host.label +  " achei o host origem\n")
 				hostSourceLabel = net.getNodeByName(host.label)
 			else:
 				pass
