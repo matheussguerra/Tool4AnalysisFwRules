@@ -261,7 +261,6 @@ def tests(net):
 		hostSourceLabel = ""
 		inicio = timeit.default_timer()
 		startTcpdumAllIface(net)
-		time.sleep(0.3)
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
@@ -272,9 +271,9 @@ def tests(net):
 			else:
 				pass
 		if(test.protocol == "tcp"):
-			th1 = Thread(target=tcpServer, args=[hostDestLabel, test.destinationIP, test.destinationPort])
-			time.sleep(0.5)
+			th1 = Thread(target=tcpServer, args=[hostDestLabel, test.destinationIP, test.destinationPort])			
 			th1.start()
+			time.sleep(0.5)
 			if(test.sourcePort == "*"):
 				th2 = Thread(target=tcpClient, args=[hostSourceLabel, test.destinationIP, test.destinationPort])
 				th2.start()				
