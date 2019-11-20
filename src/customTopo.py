@@ -330,12 +330,11 @@ def analysisLog(iface, test, path):
 	info(iface + ".txt\n")
 	f = open(iface + ".txt", 'r')
 	lines = f.readlines()
-	info("b")
 	for line in lines:
 		info(line + "\n")
 		processedLine = processTcpdumpLine(line)
 		if(test.sourceIP == processedLine[1]):	
-			info("d")		
+			info([processedLine[0], iface])		
 			path.append([processedLine[0], iface])
 
 
