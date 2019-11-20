@@ -326,13 +326,13 @@ def tests(net):
 	
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
-def analysisLog(iface,test, path):
-	info("a")
+def analysisLog(iface, test, path):
+	info(iface + ".txt\n")
 	f = open(iface + ".txt", 'r')
 	lines = f.readlines()
 	info("b")
 	for line in lines:
-		info("c")
+		info(line + "\n")
 		processedLine = processTcpdumpLine(line)
 		if(test.sourceIP == processedLine[1]):	
 			info("d")		
