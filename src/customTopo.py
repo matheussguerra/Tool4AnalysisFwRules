@@ -366,22 +366,63 @@ def analysisLog(log,test, path):
 
 	f.close()
 
+
+def processTcpdumLine(lineLog):
+	if("Flags" in lineLog): #protocolo tcp
+		lineLog = lineLog.split(" ")
+
+		time = lineLog[0]
+
+		de = lineLog[2].split('.')
+		de = de[0] + "." + de[1] + "." + d[2] + "." + d[3]
+
+		para = lineLog[4].replace(":","").split('.')
+		para = para[0] + "." + para[1] + "." + para[2] + "." + para[3]
+
+		flag = lineLog[6].replace(",","")
+
+		return time, de, para, flag
+
+
 def result(test):
+	handshake = 0
+	aux = 0
 	destHost = getHostDest(test)
 	f = open(destHost.name + ".txt")
-	log = f.read()
-	info(log)
-	if(test.sourceIP in log):
-		if(test.expected == "accept"):
-			info("\npass - os pacotes chegaram ao destino")
-		else:
-			info("\nfail - os pacotes não chegaram ao destino")
+	lines = f.readlines()
 
-	if(test.sourceIP not in log):
-		if(test.expected == "deny"):
-			info("\npass - os pacotes não chegaram ao destino")
+	for line in lines:
+		processedLine = processTcpdumLine(line)
+		if(aux ==  0 and test.sourceIP == processedLine[1] and test.destinationIP == processedLine[2]):
+			if(processedLine[3] == "[S]"):				
+				handshake += 1
+			
+		if(aux == 1 and test.destinationIP == processedLine[1] and test.sourceIP == processedLine[2]):
+			if(processedLine[3] == "[S.]"):
+				handshake += 1
+		
+		if(aux == 2 and test.sourceIP == processedLine[1] and test.destinationIP == processedLine[2]):
+			if(processedLine[3] == "[.]"):
+				handshake += 1
+
+		if(handshake == 3):
+			handshake = True
+			break	
+
+		aux += 1
+
+	if(test.expected == "accept"):
+		if(handshake == True ):
+			info("\nTeste APROVADO - os pacotes chegaram ao destino")
 		else:
-			info("\nfail - os pacotes chegaram ao destino")
+			info("\nTeste REPROVADO - os pacotes não chegaram ao destino")
+
+	if(test.expected == "deny"):
+		if(handshake == True):
+			info("\nTeste REPROVADO - os pacotes chegaram ao destino")			
+		else:
+			info("\nTeste APROVADO - os pacotes não chegaram ao destino")
+
 	f.close()
 		
 		
