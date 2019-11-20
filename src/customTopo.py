@@ -417,7 +417,9 @@ def emptyNet():
 	CLI(net)
 
 	#info('*** Stopping newtwork ***\n')
-	ctrl.stop()
+	for sw in swAux:
+		sw.stop()
+		
 	net.stop()
 	exit()
 
