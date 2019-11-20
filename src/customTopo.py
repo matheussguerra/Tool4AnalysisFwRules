@@ -409,7 +409,7 @@ def emptyNet():
 	tests(net)
 
 	#info('*** Starting CLI ***\n')
-	#CLI(net)
+	CLI(net)
 
 	#info('*** Stopping newtwork ***\n')
 	net.stop()
