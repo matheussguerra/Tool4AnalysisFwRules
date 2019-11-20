@@ -271,13 +271,15 @@ def tests(net):
 			else:
 				pass
 		if(test.protocol == "tcp"):
-			th1 = Thread(target=tcpServer,args=[hostDestLabel, test.destinationIP, test.destinationPort])
+			th1 = Thread(target=tcpServer, args=[hostDestLabel, test.destinationIP, test.destinationPort])
 			th1.start()
 			if(test.sourcePort == "*"):
-				th2 = Thread(target=tcpClient,args=[hostSourceLabel, test.destinationIP, test.destinationPort])
+				th2 = Thread(target=tcpClient, args=[hostSourceLabel, test.destinationIP, test.destinationPort])
 				th2.start()				
 			else:
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
+			t1.join()
+			t2.join()
 		if(test.protocol == "udp"):			
 			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort + " &")
 			if(test.sourcePort == "*"):				
