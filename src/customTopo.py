@@ -245,12 +245,12 @@ def startTcpdumAllIface(net):
 
 
 def tcpServer(host, ip, port):
-	host.cmd("python tcpServer.py " + str(ip) + ":" + str(port))
+	host.cmd("python tcpServer.py " + str(ip) + ":" + str(port) + " &")
 	info("sv on")
 
 
 def tcpClient(host, ip, port):
-	host.cmd("python tcpClient.py " + str(ip) + ":" + str(port))
+	host.cmd("python tcpClient.py " + str(ip) + ":" + str(port) + " &")
 	info("clt on")
 
 
