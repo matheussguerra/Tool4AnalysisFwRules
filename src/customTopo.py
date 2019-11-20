@@ -247,7 +247,6 @@ def tests(net):
 	numTest = 1
 	for test in listTests:
 		inicio = timeit.default_timer()
-		info("\nIniciando Tcpdump...\n")
 		startTcpdumAllIface(net)
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
@@ -259,10 +258,10 @@ def tests(net):
 			else:
 				pass
 		if(test.protocol == "tcp"):
-			info(hostDestLabel + " " + "python tcpServer.py " + test.destinationIP + ":" + test.destinationPort)
+			info(str(hostDestLabel) + " " + "python tcpServer.py " + str(test.destinationIP) + ":" + str(test.destinationPort))
 			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort + " &")
 			if(test.sourcePort == "*"):
-				info(hostSourceLabel + " " + "python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
+				info(str(hostSourceLabel) + " " + "python tcpClient.py " + str(test.destinationIP) + ":" + str(test.destinationPort))
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
