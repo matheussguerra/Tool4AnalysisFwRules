@@ -313,7 +313,7 @@ def tests(net):
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
 				time.sleep(0.2)
-				#analysisLog(iface.name + ".txt", test, path)		
+				analysisLog(iface.name + ".txt", test, path)		
 		path.sort()
 		info(path)
 		result(test)
@@ -328,41 +328,15 @@ def tests(net):
 
 def analysisLog(log,test, path):
 	f = open(log, 'r')
-	for line in f:
-		line = line.split(' ')
-		if("ICMP" in line):
-			pass
-		elif("Flags" in line):
-			source = line[2].split('.')
-			if(len(source) > 4):
-				port_source = source[4]
-				ip_source = source[0] + "." + source[1] + "." + source[2] + "." + source[3]
-			
-			dest = line[4].split('.')
-			if(len(dest) > 4):
-				port_dest = dest[4].replace(":","")
-				ip_dest = dest[0] + "." + dest[1] + "." + dest[2] + "." + dest[3]
-			
-			
-			if(ip_source == test.sourceIP):
-				interface = log.split('.')[0]
-				path.append([line[0],interface])
+	lines = f.readlines()
 
+	for line in lines:
+		processedLine = processTcpdumLine(line)
 
-		else:
-			source = line[2].split('.')
-			if(len(source) > 4):
-				port_source = source[4]
-				ip_source = source[0] + "." + source[1] + "." + source[2] + "." + source[3]
-			
-			dest = line[4].split('.')
-			if(len(dest) > 4):
-				port_dest = dest[4].replace(":","")
-				ip_dest = dest[0] + "." + dest[1] + "." + dest[2] + "." + dest[3]
-			
-			if(ip_source == test.sourceIP):
-				interface = log.split('.')[0]
-				path.append([line[0],interface])
+		if(test.sourceIP == processedLine[1]):
+			interface = log.split('.')[0]
+			path.append([processedLine[0], interface])
+
 
 	f.close()
 
@@ -390,7 +364,7 @@ def result(test):
 	destHost = getHostDest(test)
 	f = open(destHost.name + ".txt")
 	lines = f.readlines()
-
+	
 	for line in lines:
 		processedLine = processTcpdumLine(line)
 		if(aux ==  0 and test.sourceIP == processedLine[1] and test.destinationIP == processedLine[2]):
