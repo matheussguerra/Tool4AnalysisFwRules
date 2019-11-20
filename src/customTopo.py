@@ -313,6 +313,7 @@ def tests(net):
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
 				time.sleep(0.2)
+				info(iface + ".txt\n")
 				analysisLog(iface.name, test, path)		
 		path.sort()
 		info(path)
@@ -327,7 +328,6 @@ def tests(net):
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
 def analysisLog(iface, test, path):
-	info(iface + ".txt\n")
 	f = open(iface + ".txt", 'r')
 	lines = f.readlines()
 	for line in lines:
