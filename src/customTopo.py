@@ -261,6 +261,7 @@ def tests(net):
 		hostSourceLabel = ""
 		inicio = timeit.default_timer()
 		startTcpdumAllIface(net)
+		time.sleep(0.3)
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
 		for host in listHosts:
 			#dar um jeito de iterar em todas as interfaces (estático no momento)
@@ -278,8 +279,8 @@ def tests(net):
 				th2.start()				
 			else:
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
-			t1.join()
-			t2.join()
+			th1.join()
+			th2.join()
 		if(test.protocol == "udp"):			
 			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort + " &")
 			if(test.sourcePort == "*"):				
