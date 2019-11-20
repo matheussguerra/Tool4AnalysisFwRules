@@ -246,12 +246,18 @@ def startTcpdumAllIface(net):
 
 def tcpServer(host, ip, port):
 	host.cmd("python tcpServer.py " + str(ip) + ":" + str(port) + " &")
-	info("sv on")
 
 
 def tcpClient(host, ip, port):
 	host.cmd("python tcpClient.py " + str(ip) + ":" + str(port) + " &")
-	info("clt on")
+
+
+def udpServer(host, ip, port):
+	host.cmd("python udpServer.py " + str(ip) + ":" + str(port) + " &")
+
+
+def udpClient(host, ip, port):
+	host.cmd("python udpClient.py " + str(ip) + ":" + str(port) + " &")
 
 
 def tests(net):
@@ -282,11 +288,16 @@ def tests(net):
 			th1.join()
 			th2.join()
 		if(test.protocol == "udp"):			
-			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort + " &")
+			th1 = Thread(target=udpServer, args=[hostDestLabel, test.destinationIP, test.destinationPort])
+			th1.start()
+			time.sleep(0.5)
 			if(test.sourcePort == "*"):				
-				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
+				th2 = Thread(target=udpClient, args=[hostSourceLabel, test.destinationIP, test.destinationPort])
+				th2.start()
 			else:
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
+			th1.join()
+			th2.join()
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 		
