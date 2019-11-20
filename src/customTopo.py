@@ -6,6 +6,7 @@ from mininet.node import Controller
 from mininet.cli import CLI
 from mininet.log import setLogLevel, info
 from mininet.node import OVSSwitch, Controller, RemoteController
+from threading import Thread
 import time
 import os
 import json
@@ -243,6 +244,16 @@ def startTcpdumAllIface(net):
 			hostNET.cmd(command.start_tcpdump())
 
 
+def tcpServer(host, ip, port):
+	host.cmd("python tcpServer.py " + str(ip) + ":" + str(port))
+	info("sv on")
+
+
+def tcpClient(hots, ip, port):
+	host.cmd("python tcpClient.py " + str(ip) + ":" + str(port))
+	info("clt on")
+
+
 def tests(net):
 	numTest = 1
 	for test in listTests:
@@ -260,9 +271,11 @@ def tests(net):
 			else:
 				pass
 		if(test.protocol == "tcp"):
-			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort + " &")
+			th1 = Thread(target=tcpServer,args=[hostDestLabel, test.destinationIP, test.destinationPort])
+			th1.start()
 			if(test.sourcePort == "*"):
-				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
+				th2 = Thread(target=tcpClient,args=[hostSourceLabel, test.destinationIP, test.destinationPort])
+				th2.start()				
 			else:
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
 		if(test.protocol == "udp"):			
