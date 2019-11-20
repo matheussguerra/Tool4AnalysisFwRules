@@ -43,7 +43,7 @@
                         "gw" : "0.0.0.0"
                     }
                 ],
-                "fwCommand":["iptables -A OUTPUT -d 192.168.0.0/24 -p tcp -m state --state NEW -j REJECT","iptables -A OUTPUT -d 192.168.0.0/24 -p tcp -m state --state NEW -j REJECT","iptables -A INPUT -s 10.0.0.0/24 -p udp -j REJECT","iptables -A INPUT -s 10.0.0.0/24 -p tcp -m state --state NEW -j REJECT","iptables -A FORWARD -d 192.168.0.0/24 -p tcp --dport 22 -m state --state NEW -j REJECT","iptables -A FORWARD -d 192.168.0.0/24 -p tcp --dport 80 -m state --state NEW -j REJECT"]
+                "fwCommand":["iptables -A OUTPUT -d 192.168.0.0/24 -p tcp -m state --state NEW -j LOG","iptables -A OUTPUT -d 192.168.0.0/24 -p tcp -m state --state NEW -j REJECT","iptables -A INPUT -s 10.0.0.0/24 -p udp -j REJECT","iptables -A INPUT -s 10.0.0.0/24 -p tcp -m state --state NEW -j REJECT","iptables -A FORWARD -d 192.168.0.0/24 -p tcp --dport 22 -m state --state NEW -j REJECT","iptables -A FORWARD -d 192.168.0.0/24 -p tcp --dport 80 -m state --state NEW -j REJECT"]
             },
 
             {			
