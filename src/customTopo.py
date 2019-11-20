@@ -309,7 +309,6 @@ def tests(net):
 		hostNet.cmd("mkdir teste" + str(numTest))
 		for host in listHosts:
 			for iface in host.iface:
-				info(iface.name + ".txt\n")
 				command = Command(iface)
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
@@ -332,12 +331,12 @@ def analysisLog(iface, test, path):
 	f = open(iface + ".txt", 'r')
 	lines = f.readlines()
 	for line in lines:
-		info(line + "\n")
+		#info(line + "\n")
 		processedLine = processTcpdumpLine(line)
 		if(test.sourceIP == processedLine[1]):
 			pass	
 			#info([processedLine[0], iface])		
-			#path.append([processedLine[0], iface])
+			path.append([processedLine[0], iface])
 
 
 	f.close()
@@ -358,6 +357,8 @@ def processTcpdumpLine(lineLog):
 		flag = lineLog[6].replace(",","")
 
 		return time, de, para, flag
+	else:
+		return ["","","",""]
 
 
 def result(test):
