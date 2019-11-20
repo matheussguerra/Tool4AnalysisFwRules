@@ -259,13 +259,15 @@ def tests(net):
 			else:
 				pass
 		if(test.protocol == "tcp"):
-			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort)
+			info(hostDestLabel + " " + "python tcpServer.py " + test.destinationIP + ":" + test.destinationPort)
+			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort + " &")
 			if(test.sourcePort == "*"):
+				info(hostSourceLabel + " " + "python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
 		if(test.protocol == "udp"):			
-			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort + "&")
+			hostDestLabel.cmd("python udpServer.py " + test.destinationIP + ":" + test.destinationPort + " &")
 			time.sleep(0.6)
 			if(test.sourcePort == "*"):				
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort)
@@ -367,7 +369,7 @@ def getHostDest(test):
 
 def emptyNet():
 	net = Mininet(controller=Controller)
-	ctrl = net.addController( 'c0', port=6633)
+	ctrl = net.addController('c1')
 
 	info('*** Adding hosts ***\n')
 	for host in listHosts:
