@@ -29,7 +29,7 @@
 
             {			
                 "type" : "router",
-                "label" : "s2",
+                "label" : "r1",
                 "dns":"",
                 "iface":[
                     {
