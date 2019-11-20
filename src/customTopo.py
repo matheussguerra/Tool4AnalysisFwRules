@@ -334,7 +334,7 @@ def analysisLog(log,test, path):
 		processedLine = processTcpdumLine(line)
 
 		if(test.sourceIP == processedLine[1]):
-			interface = log.split('.')[0]
+			interface = str(log).split('.')[0]
 			path.append([processedLine[0], interface])
 
 
