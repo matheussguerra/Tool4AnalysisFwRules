@@ -246,6 +246,8 @@ def startTcpdumAllIface(net):
 def tests(net):
 	numTest = 1
 	for test in listTests:
+		hostDestLabel = ""
+		hostSourceLabel = ""
 		inicio = timeit.default_timer()
 		startTcpdumAllIface(net)
 		info("\nIniciando teste:\n---\n" + str(test) + "\n---\n")
@@ -271,8 +273,6 @@ def tests(net):
 				hostSourceLabel.cmd("python udpClient.py " + test.destinationIP + ":" + test.destinationPort + " " + test.sourcePort)
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
-
-		time.sleep(1)
 		
 		path = []
 		aux = listHosts[0].label
@@ -292,7 +292,8 @@ def tests(net):
 		result(test)
 		fim = timeit.default_timer()
 		hostNet.cmd("mv *.txt /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
-		hostNet.cmd("rm *.log")
+		time.sleep(0.2)
+		hostNet.cmd("sudo rm *.log")
 		info("\nteste realizado em: " + str(fim -inicio) + '\n')
 	
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
