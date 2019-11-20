@@ -249,7 +249,7 @@ def tcpServer(host, ip, port):
 	info("sv on")
 
 
-def tcpClient(hots, ip, port):
+def tcpClient(host, ip, port):
 	host.cmd("python tcpClient.py " + str(ip) + ":" + str(port))
 	info("clt on")
 
