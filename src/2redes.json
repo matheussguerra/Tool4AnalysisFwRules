@@ -43,7 +43,7 @@
                         "gw" : "0.0.0.0"
                     }
                 ],
-                "fwCommand":["iptables -A FORWARD -d 192.168.0.0/24 -j DROP "]
+                "fwCommand":["iptables -A FORWARD -d 192.168.0.0/24 --dport 80 -p tcp --syn -j DROP"]
             },
 
             {			
@@ -120,17 +120,17 @@
 	"test":[{
 		"sourceIP": "10.0.0.2",
 		"destIP" : "192.168.0.2",
-		"protocol" : "udp",
-		"sPort" : "*",
-		"dPort" : "53",
-		"expected" : "accept"
-	},
-	{
-		"sourceIP": "192.168.0.2",
-		"destIP" : "10.0.0.2",
 		"protocol" : "tcp",
 		"sPort" : "*",
 		"dPort" : "80",
+		"expected" : "deny"
+	},
+	{
+		"sourceIP": "10.0.0.3",
+		"destIP" : "192.168.0.3",
+		"protocol" : "tcp",
+		"sPort" : "*",
+		"dPort" : "22",
 		"expected" : "deny"
 	}
 ]
