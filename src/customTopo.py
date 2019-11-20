@@ -327,19 +327,22 @@ def tests(net):
 #"iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p tcp --dport 80 -j DROP"
 
 def analysisLog(iface,test, path):
+	info("a")
 	f = open(iface + ".txt", 'r')
 	lines = f.readlines()
-
+	info("b")
 	for line in lines:
-		processedLine = processTcpdumLine(line)
-		if(test.sourceIP == processedLine[1]):			
+		info("c")
+		processedLine = processTcpdumpLine(line)
+		if(test.sourceIP == processedLine[1]):	
+			info("d")		
 			path.append([processedLine[0], iface])
 
 
 	f.close()
 
 
-def processTcpdumLine(lineLog):
+def processTcpdumpLine(lineLog):
 	if("Flags" in lineLog): #protocolo tcp
 		lineLog = lineLog.split(" ")
 
@@ -364,7 +367,7 @@ def result(test):
 	lines = f.readlines()
 	
 	for line in lines:
-		processedLine = processTcpdumLine(line)
+		processedLine = processTcpdumpLine(line)
 		if(aux ==  0 and test.sourceIP == processedLine[1] and test.destinationIP == processedLine[2]):
 			if(processedLine[3] == "[S]"):				
 				handshake += 1
