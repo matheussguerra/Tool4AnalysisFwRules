@@ -260,7 +260,7 @@ def tests(net):
 			else:
 				pass
 		if(test.protocol == "tcp"):
-			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort)
+			hostDestLabel.cmd("python tcpServer.py " + test.destinationIP + ":" + test.destinationPort + " &")
 			if(test.sourcePort == "*"):
 				hostSourceLabel.cmd("python tcpClient.py " + test.destinationIP + ":" + test.destinationPort)
 			else:
