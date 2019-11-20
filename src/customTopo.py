@@ -274,7 +274,7 @@ def tests(net):
 		if(test.protocol == "icmp"):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 
-		time.sleep(0.5)
+		time.sleep(1)
 		
 		path = []
 		aux = listHosts[0].label
@@ -417,9 +417,6 @@ def emptyNet():
 	CLI(net)
 
 	#info('*** Stopping newtwork ***\n')
-	for sw in swAux:
-		sw.stop()
-		
 	net.stop()
 	exit()
 
