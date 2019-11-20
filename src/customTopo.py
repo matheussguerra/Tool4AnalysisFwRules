@@ -291,8 +291,8 @@ def tests(net):
 			hostSourceLabel.cmd("ping -n -c 1 " + test.destinationIP)
 		
 		path = []
-		aux = listHosts[0].label
-		hostNet = net.getNodeByName(aux)
+		hostNet = net.getNodeByName('h1')
+		time.sleep(1)		
 		hostNet.cmd("killall -1 tcpdump")
 		time.sleep(1)		
 		hostNet.cmd("mkdir teste" + str(numTest))
