@@ -357,48 +357,90 @@ def processTcpdumpLine(lineLog):
 		flag = lineLog[6].replace(",","")
 
 		return time, de, para, flag
-	else:
+
+	elif("ICMP" in lineLog):
 		return ["","","",""]
+
+	else:
+		lineLog = lineLog.split(" ")
+
+		time = lineLog[0]
+
+		de = lineLog[2].split('.')
+		de = de[0] + "." + de[1] + "." + de[2] + "." + de[3]
+
+		para = lineLog[4].replace(":","").split('.')
+		para = para[0] + "." + para[1] + "." + para[2] + "." + para[3]
+
+		return time, de, para
+
 
 
 def result(test):
 	handshake = 0
+	datagram = False
 	aux = 0
 	destHost = getHostDest(test)
 	f = open(destHost.name + ".txt")
 	lines = f.readlines()
 	
 	for line in lines:
-		processedLine = processTcpdumpLine(line)
-		if(aux ==  0 and test.sourceIP == processedLine[1] and test.destinationIP == processedLine[2]):
-			if(processedLine[3] == "[S]"):				
-				handshake += 1
+		if("Flags" in line):
+
+			processedLine = processTcpdumpLine(line)
+			if(aux ==  0 and test.sourceIP == processedLine[1] and test.destinationIP == processedLine[2]):
+				if(processedLine[3] == "[S]"):				
+					handshake += 1
+				
+			if(aux == 1 and test.destinationIP == processedLine[1] and test.sourceIP == processedLine[2]):
+				if(processedLine[3] == "[S.]"):
+					handshake += 1
 			
-		if(aux == 1 and test.destinationIP == processedLine[1] and test.sourceIP == processedLine[2]):
-			if(processedLine[3] == "[S.]"):
-				handshake += 1
-		
-		if(aux == 2 and test.sourceIP == processedLine[1] and test.destinationIP == processedLine[2]):
-			if(processedLine[3] == "[.]"):
-				handshake += 1
+			if(aux == 2 and test.sourceIP == processedLine[1] and test.destinationIP == processedLine[2]):
+				if(processedLine[3] == "[.]"):
+					handshake += 1
 
-		if(handshake == 3):
-			handshake = True
-			break	
+			if(handshake == 3):
+				handshake = True
+				break	
 
-		aux += 1
-
-	if(test.expected == "accept"):
-		if(handshake == True ):
-			info("\nTeste APROVADO - os pacotes chegaram ao destino")
+			aux += 1
+		elif("ICMP" in line):
+			pass
 		else:
-			info("\nTeste REPROVADO - os pacotes não chegaram ao destino")
+			processedLine = processTcpdumpLine(line)
+			if(test.sourceIP == processedLine[1]):
+				datagram = True
+				break
 
-	if(test.expected == "deny"):
-		if(handshake == True):
-			info("\nTeste REPROVADO - os pacotes chegaram ao destino")			
-		else:
-			info("\nTeste APROVADO - os pacotes não chegaram ao destino")
+	if(test.protocol == "tcp"):
+		if(test.expected == "accept"):
+			if(handshake == True):
+				info("\nTeste APROVADO - os pacotes chegaram ao destino")
+			else:
+				info("\nTeste REPROVADO - os pacotes não chegaram ao destino")
+
+		if(test.expected == "deny"):
+			if(handshake == True):
+				info("\nTeste REPROVADO - os pacotes chegaram ao destino")			
+			else:
+				info("\nTeste APROVADO - os pacotes não chegaram ao destino")
+					
+	elif(test.protocol == "ICMP"):
+		pass
+	else:
+		if(test.expected == "accept"):
+			if(datagram == True):
+				info("\nTeste APROVADO - os pacotes chegaram ao destino")
+			else:
+				info("\nTeste REPROVADO - os pacotes não chegaram ao destino")
+
+		if(test.expected == "deny"):
+			if(datagram == True):
+				info("\nTeste REPROVADO - os pacotes chegaram ao destino")			
+			else:
+				info("\nTeste APROVADO - os pacotes não chegaram ao destino")
+
 
 	f.close()
 		
