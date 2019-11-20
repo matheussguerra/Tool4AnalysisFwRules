@@ -418,6 +418,7 @@ def emptyNet():
 
 	#info('*** Stopping newtwork ***\n')
 	net.stop()
+	ctrl.stop()
 	exit()
 
 
