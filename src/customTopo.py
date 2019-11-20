@@ -333,9 +333,10 @@ def analysisLog(iface, test, path):
 	for line in lines:
 		info(line + "\n")
 		processedLine = processTcpdumpLine(line)
-		if(test.sourceIP == processedLine[1]):	
-			info([processedLine[0], iface])		
-			path.append([processedLine[0], iface])
+		if(test.sourceIP == processedLine[1]):
+			pass	
+			#info([processedLine[0], iface])		
+			#path.append([processedLine[0], iface])
 
 
 	f.close()
