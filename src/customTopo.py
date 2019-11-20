@@ -313,7 +313,7 @@ def tests(net):
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
 				time.sleep(0.2)				
-				#analysisLog(iface.name, test, path)		
+				analysisLog(iface.name, test, path)		
 		path.sort()
 		info(path)
 		result(test)
