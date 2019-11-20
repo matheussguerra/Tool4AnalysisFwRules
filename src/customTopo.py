@@ -383,7 +383,7 @@ def emptyNet():
 	for link in listLink:
 		hostFrom = link.source
 		hostTo = link.dest
-		net.addLink(hostFrom, hostTo)
+		net.addLink(str(hostFrom), str(hostTo))
 
 	info('*** Configuring hosts ***\n')
 	for host in listHosts:
