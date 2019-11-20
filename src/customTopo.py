@@ -309,12 +309,12 @@ def tests(net):
 		hostNet.cmd("mkdir teste" + str(numTest))
 		for host in listHosts:
 			for iface in host.iface:
+				info(iface.name + ".txt\n")
 				command = Command(iface)
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
-				time.sleep(0.2)
-				info(iface.name + ".txt\n")
-				analysisLog(iface.name, test, path)		
+				time.sleep(0.2)				
+				#analysisLog(iface.name, test, path)		
 		path.sort()
 		info(path)
 		result(test)
@@ -322,6 +322,7 @@ def tests(net):
 		hostNet.cmd("mv *.txt /home/mininet/mininet/tcc/tool4analysisfwrules/src/teste" + str(numTest))
 		time.sleep(0.2)
 		hostNet.cmd("sudo rm *.log")
+		hostNet.cmd("sudo rm *.txt")
 		info("\nteste realizado em: " + str(fim -inicio) + '\n')
 		numTest = numTest + 1
 	
