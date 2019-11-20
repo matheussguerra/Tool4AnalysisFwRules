@@ -313,7 +313,7 @@ def tests(net):
 				hostNET = net.getNodeByName(host.label)
 				hostNET.cmd(command.convertLogTcpdump())
 				time.sleep(0.2)
-				analysisLog(iface.name + ".txt", test, path)		
+				#analysisLog(iface.name + ".txt", test, path)		
 		path.sort()
 		info(path)
 		result(test)
@@ -374,7 +374,7 @@ def processTcpdumLine(lineLog):
 		time = lineLog[0]
 
 		de = lineLog[2].split('.')
-		de = de[0] + "." + de[1] + "." + d[2] + "." + d[3]
+		de = de[0] + "." + de[1] + "." + de[2] + "." + de[3]
 
 		para = lineLog[4].replace(":","").split('.')
 		para = para[0] + "." + para[1] + "." + para[2] + "." + para[3]
