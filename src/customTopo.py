@@ -418,7 +418,7 @@ def result(test):
 				info("\nTeste REPROVADO - os pacotes não chegaram ao destino")
 
 		if(test.expected == "deny"):
-			if(handshake != True):
+			if(handshake == True):
 				info("\nTeste REPROVADO - os pacotes chegaram ao destino")			
 			else:
 				info("\nTeste APROVADO - os pacotes não chegaram ao destino")
@@ -434,7 +434,7 @@ def result(test):
 				info("\nTeste REPROVADO - os pacotes não chegaram ao destino")
 
 		if(test.expected == "deny"):
-			if(datagram != True):
+			if(datagram == True):
 				info("\nTeste REPROVADO - os pacotes chegaram ao destino")			
 			else:
 				info("\nTeste APROVADO - os pacotes não chegaram ao destino")
