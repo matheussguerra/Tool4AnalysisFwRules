@@ -59,35 +59,19 @@
 
 	"test":[
 	{
-		"sourceIP": "10.0.0.2",
-		"destIP" : "192.168.0.2",
+		"sourceIP": "192.168.0.2",
+		"destIP" : "10.0.0.2",
+		"protocol" : "tcp",
+		"sPort" : "*",
+		"dPort" : "80",
+		"expected" : "deny"
+	},
+	{
+		"sourceIP": "192.168.0.2",
+		"destIP" : "10.0.0.2",
 		"protocol" : "udp",
 		"sPort" : "*",
 		"dPort" : "53",
-		"expected" : "deny"
-	},
-	{
-		"sourceIP": "10.0.0.2",
-		"destIP" : "192.168.0.2",
-		"protocol" : "tcp",
-		"sPort" : "*",
-		"dPort" : "80",
-		"expected" : "accept"
-	},
-	{
-		"sourceIP": "192.168.0.2",
-		"destIP" : "10.0.0.2",
-		"protocol" : "tcp",
-		"sPort" : "*",
-		"dPort" : "80",
-		"expected" : "deny"
-	},
-	{
-		"sourceIP": "192.168.0.2",
-		"destIP" : "10.0.0.2",
-		"protocol" : "udp",
-		"sPort" : "*",
-		"dPort" : "23",
 		"expected" : "accept"
 	}
 ]
