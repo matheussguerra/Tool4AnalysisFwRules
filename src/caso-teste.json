@@ -90,3 +90,5 @@
 		"dPort" : "53",
 		"expected" : "deny"
     }  
+    ]
+}
