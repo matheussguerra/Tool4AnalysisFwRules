@@ -1,0 +1,92 @@
+{
+	"scene":{
+		"hosts":[
+			{			
+			"type" : "host",
+			"label" : "h1",
+			"dns":"8.8.8.8",
+			"iface":[
+				{
+					"ip" : "192.168.0.2",
+					"mask" : "255.255.255.0",
+					"gw" : "192.168.0.1"
+				}]
+			},			
+			{
+			"type" : "host",
+			"label" : "h2",
+			"dns":"8.8.8.8",
+			"iface":[
+				{
+					"ip" : "10.0.0.2",
+					"mask" : "255.255.255.0",
+					"gw" : "10.0.0.1"
+				}]
+			
+
+			},			
+			{
+			"type" : "router",
+			"label" : "r1",
+			"dns":"8.8.8.8",
+			"iface":[{
+					"ip" : "192.168.0.1",
+					"mask" : "255.255.255.0",
+					"gw" : "0.0.0.0"},
+					{
+					"ip" : "10.0.0.1",
+					"mask" : "255.255.255.0",
+					"gw" : "0.0.0.0"}],
+			"fwCommand": ["iptables -A FORWARD -s 192.168.0.2 -d 10.0.0.2 -p udp --dport 53 -j DROP"]
+			}
+		],
+	
+		"links":[{
+				"label" : "h1-r1",
+				"to" : "h1",
+				"from" : "r1"
+			},
+			{
+				"label" : "r1-h2",
+				"to" : "r1",
+				"from" : "h2"
+			}
+			],
+
+		"switchs":""
+		},
+
+
+	"test":[
+	{
+		"sourceIP": "192.168.0.2",
+		"destIP" : "10.0.0.2",
+		"protocol" : "udp",
+		"sPort" : "*",
+		"dPort" : "53",
+		"expected" : "deny"
+    },	
+    {
+		"sourceIP": "192.168.0.2",
+		"destIP" : "10.0.0.2",
+		"protocol" : "udp",
+		"sPort" : "*",
+		"dPort" : "53",
+		"expected" : "accept"
+    },
+    {
+		"sourceIP": "10.0.0.2",
+		"destIP" : "192.168.0.2",
+		"protocol" : "udp",
+		"sPort" : "*",
+		"dPort" : "53",
+		"expected" : "accept"
+    },  
+    {
+		"sourceIP": "10.0.0.2",
+		"destIP" : "192.168.0.2",
+		"protocol" : "udp",
+		"sPort" : "*",
+		"dPort" : "53",
+		"expected" : "deny"
+    }  
